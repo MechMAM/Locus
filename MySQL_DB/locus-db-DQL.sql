@@ -163,9 +163,9 @@ create table if not exists Proposito (
 	prp_id int primary key not null auto_increment,
 	prp_nome varchar(50) not null,
 	prp_descricao text not null,
-	prp_data_inclusao datetime not null,
-	prp_data_modificacao datetime not null,
-	prp_status tinyint not null
+	prp_data_inclusao datetime not null default current_timestamp,
+	prp_data_modificacao datetime not null default current_timestamp on update current_timestamp,
+	prp_status tinyint not null default 1
 );
 
 
@@ -176,9 +176,9 @@ create table if not exists Servico (
 	srv_nome varchar(50) not null,
 	srv_descricao text not null,
 	srv_valor decimal(4,2) not null,
-	srv_data_inclusao datetime not null,
-	srv_data_modificacao datetime not null,
-	srv_status tinyint not null,
+	srv_data_inclusao datetime not null default current_timestamp,
+	srv_data_modificacao datetime not null not null default current_timestamp on update current_timestamp,
+	srv_status tinyint not null default 1, 
 	srv_gratuito tinyint not null
 );
 
@@ -188,8 +188,8 @@ create table if not exists Imagem (
 	img_nome varchar(50) not null,
 	img_caminho varchar(255) not null,
 	img_descricao text not null,
-	img_data_inclusao datetime not null,
-	img_data_modificacao datetime not null,
+	img_data_inclusao datetime not null default current_timestamp,
+	img_data_modificacao datetime not null not null default current_timestamp on update current_timestamp,
 	Espaco_esp_id int not null
 );
 
@@ -198,9 +198,9 @@ create table if not exists Tipo_Espaco (
 	tes_id int primary key not null auto_increment,
 	tes_nome varchar(50) not null,
 	tes_descricao text not null,
-	tes_data_inclusao datetime not null,
-	tes_data_modificacao datetime not null,
-	tes_status tinyint not null
+	tes_data_inclusao datetime not null default current_timestamp,
+	tes_data_modificacao datetime not null not null default current_timestamp on update current_timestamp,
+	tes_status tinyint not null default 1
 );
 
 drop table if exists Diferencial;
@@ -208,9 +208,9 @@ create table if not exists Diferencial (
 	dif_id int primary key not null auto_increment,
 	dif_nome varchar(50) not null,
 	dif_descricao text not null,
-	dif_data_inclusao datetime not null,
-	dif_data_modificacao datetime not null,
-	dif_status boolean not null
+	dif_data_inclusao datetime not null default current_timestamp,
+	dif_data_modificacao datetime not null not null default current_timestamp on update current_timestamp,
+	dif_status boolean not null default 1
 );
 
 drop table if exists Espaco_has_Proposito;

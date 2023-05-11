@@ -2,4 +2,4 @@ insert into acessibilidade (acs_nome, acs_descricao) values ('entrada', 'Entrada
 
 select * from acessibilidade;
 
-update acessibilidade set acs_nome = 'entrada_degraus' where acs_id = 1;
+update acessibilidade set acs_nome = 'entrada' where acs_id = 1;

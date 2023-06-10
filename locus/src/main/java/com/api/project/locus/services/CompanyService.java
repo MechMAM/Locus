@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.api.project.locus.models.CompanyModel;
+import com.api.project.locus.models.UserModel;
 import com.api.project.locus.repositories.CompanyRepository;
 
 import jakarta.transaction.Transactional;
@@ -18,10 +19,11 @@ public class CompanyService {
 	
 	@Autowired
 	CompanyRepository companyRepository;
-
+	
 	@Transactional
-	public CompanyModel save(CompanyModel userModel) {
-		return companyRepository.save(userModel);
+	public CompanyModel saveCompanyToUser(Optional<UserModel> usuario, CompanyModel empresa) {
+		empresa.getUsuarioId().add(usuario.get());
+		return companyRepository.save(empresa);
 	}
 	
 	public String cleanCnpj(String cnpj) {
@@ -40,8 +42,12 @@ public class CompanyService {
 	}
 
 	@Transactional
-	public void delete(CompanyModel userModel) {
-		companyRepository.delete(userModel);;		
+	public void delete(CompanyModel companyModel) {
+		companyRepository.delete(companyModel);;		
+	}
+
+	public CompanyModel save(CompanyModel companyModel) {
+		return companyRepository.save(companyModel);
 	}
 
 	

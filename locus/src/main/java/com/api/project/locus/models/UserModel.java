@@ -7,6 +7,8 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -52,6 +54,7 @@ public class UserModel implements Serializable{
 					CascadeType.MERGE
 					},
 			mappedBy = "usuarioId")
+	@JsonIgnore
 	private Set<CompanyModel> empresaId = new HashSet<>();;
 	
 	public UserModel() {

@@ -28,7 +28,7 @@ import jakarta.validation.Valid;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
-@RequestMapping("/purpose")
+@RequestMapping("/api/purpose")
 public class PropositoController {
 	
 	@Autowired

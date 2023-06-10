@@ -25,34 +25,44 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.api.project.locus.dtos.CompanyDto;
 import com.api.project.locus.models.CompanyModel;
+import com.api.project.locus.models.UserModel;
+import com.api.project.locus.repositories.UserRepository;
 import com.api.project.locus.services.CompanyService;
 
 import jakarta.validation.Valid;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
-@RequestMapping("/company")
+@RequestMapping("/api")
 public class CompanyController {
 	
 	@Autowired
 	CompanyService companyService;
 	
-	@PostMapping
-	public ResponseEntity<Object> saveCompany(@RequestBody @Valid CompanyDto companyDto){
+	@Autowired
+	UserRepository userRepository;
+	
+	@PostMapping("/user/{id}/company")
+	public ResponseEntity<Object> saveCompany(@PathVariable(value = "id") Long userId, 
+											  @RequestBody @Valid CompanyDto companyDto){
 		var companyModel = new CompanyModel();
 		BeanUtils.copyProperties(companyDto, companyModel);
+		Optional<UserModel> userModelOptional = userRepository.findById(userId);
+		if (!userModelOptional.isPresent()) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuário não encontrado!");
+		}
 		companyModel.setCnpj(companyService.cleanCnpj(companyModel.getCnpj()));
 		companyModel.setDataCriacao(LocalDateTime.now(ZoneId.of("UTC")));
-		return ResponseEntity.status(HttpStatus.CREATED).body(companyService.save(companyModel));
+		return ResponseEntity.status(HttpStatus.CREATED).body(companyService.saveCompanyToUser(userModelOptional, companyModel));
 	}
 	
-	@GetMapping
+	@GetMapping("/company")
 	public ResponseEntity<Page<CompanyModel>> getAllCompanys(@PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.ASC) Pageable pageable){
 		return ResponseEntity.status(HttpStatus.OK).body(companyService.findAll(pageable));
 	}
 	
 
-	@GetMapping("/{id}")
+	@GetMapping("/company/{id}")
 	public ResponseEntity<Object> getOneCompany(@PathVariable(value = "id") UUID id){
 		Optional<CompanyModel> companyModelOptional = companyService.findById(id);
 		if (!companyModelOptional.isPresent()) {
@@ -61,7 +71,7 @@ public class CompanyController {
 		return ResponseEntity.status(HttpStatus.OK).body(companyModelOptional.get());
 	}
 	
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/company/{id}")
 	public ResponseEntity<Object> deleteCompany(@PathVariable(value = "id") UUID id){
 		Optional<CompanyModel> companyModelOptional = companyService.findById(id);
 		if (!companyModelOptional.isPresent()) {
@@ -71,7 +81,7 @@ public class CompanyController {
 		return ResponseEntity.status(HttpStatus.OK).body("Usuário deletado!");
 	}
 	
-	@PutMapping("/{id}")
+	@PutMapping("/company/{id}")
 	public ResponseEntity<Object> updateCompany(@PathVariable(value = "id") UUID id, 
 											 @RequestBody @Valid CompanyDto companyDto){
 		Optional<CompanyModel> companyModelOptional = companyService.findById(id);
@@ -82,6 +92,7 @@ public class CompanyController {
 		BeanUtils.copyProperties(companyDto, companyModel);
 		companyModel.setId(companyModelOptional.get().getId());
 		companyModel.setDataCriacao(companyModelOptional.get().getDataCriacao());
+		companyModel.setUsuarioId(companyModelOptional.get().getUsuarioId());
 		return ResponseEntity.status(HttpStatus.OK).body(companyService.save(companyModel));
 	}
 }

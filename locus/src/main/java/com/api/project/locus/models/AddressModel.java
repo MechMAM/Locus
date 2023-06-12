@@ -14,7 +14,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "Endereco")
-public class AdressModel implements Serializable{
+public class AddressModel implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -51,11 +51,11 @@ public class AdressModel implements Serializable{
 	@Column
 	private LocalDateTime dataModificacao;
 
-	public AdressModel() {
+	public AddressModel() {
 		super();
 	}
 
-	public AdressModel(UUID id, String bairro, String logradouro, String numero, String complemento, String cidade,
+	public AddressModel(UUID id, String bairro, String logradouro, String numero, String complemento, String cidade,
 			String estado, String pais, String cep, LocalDateTime dataInclusao, LocalDateTime dataModificacao) {
 		super();
 		this.id = id;
@@ -176,7 +176,7 @@ public class AdressModel implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		AdressModel other = (AdressModel) obj;
+		AddressModel other = (AddressModel) obj;
 		return Objects.equals(id, other.id);
 	}
 

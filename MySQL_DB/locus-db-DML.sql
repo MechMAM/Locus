@@ -9,6 +9,7 @@ insert into acessibilidade (acs_nome, acs_descricao) values
 select * from acessibilidade;
 
 update acessibilidade set acs_nome = 'entrada' where acs_id = 1;
+<<<<<<< HEAD
 
 insert into proposito (prp_nome, prp_descricao) values 
 ('Palestras','Local semelhante a um auditório'),
@@ -20,30 +21,3 @@ insert into proposito (prp_nome, prp_descricao) values
 ('Colações de grau','Local para muitas pessoas e com recursos de audiovisuais');
 
 select * from proposito;
-
-/*teste*/
-
-[{
-    "nome": "Seminários",
-    "descricao": "Local com bons projetores e recursos audiovisuais"
-},
-{
-    "nome": "Peças Teatrais",
-    "descricao": "Local com equipamentos de palco e boa acústica para apresentações"
-},
-{
-    "nome": "Convenções",
-    "descricao": "Local com boa área para mostra e circulação de pessoas"
-},
-{
-    "nome": "Recitais",
-    "descricao": "Local com boa acústica e equipamentos para apresentações"
-},
-{
-    "nome": "Eventos empresariais",
-    "descricao": "Local adequado para apresentações empresariais"
-},
-{
-    "nome": "Colações de grau",
-    "descricao": "Local para muitas pessoas e com recursos de audiovisuais"
-}]

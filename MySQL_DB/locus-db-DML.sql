@@ -9,7 +9,6 @@ insert into acessibilidade (acs_nome, acs_descricao) values
 select * from acessibilidade;
 
 update acessibilidade set acs_nome = 'entrada' where acs_id = 1;
-<<<<<<< HEAD
 
 insert into proposito (prp_nome, prp_descricao) values 
 ('Palestras','Local semelhante a um auditório'),

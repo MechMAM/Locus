@@ -1,7 +1,5 @@
 package com.api.project.locus.controllers;
 
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
@@ -40,8 +38,7 @@ public class UserController {
 	public ResponseEntity<Object> saveUser(@RequestBody @Valid UserDto userDto){
 		var userModel = new UserModel();
 		BeanUtils.copyProperties(userDto, userModel);
-		userModel.setCpf(userService.cleanCpf(userModel.getCpf()));
-		userModel.setCreatedDate(LocalDateTime.now(ZoneId.of("UTC")));
+		userService.setDefaults(userModel);
 		return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(userModel));
 	}
 	

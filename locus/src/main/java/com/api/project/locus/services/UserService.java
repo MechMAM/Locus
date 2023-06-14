@@ -1,5 +1,7 @@
 package com.api.project.locus.services;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +44,12 @@ public class UserService implements UserServiceInterface{
 	@Transactional
 	public void delete(UserModel userModel) {
 		userRepository.delete(userModel);;		
+	}
+
+	public void setDefaults(UserModel userModel) {
+		userModel.setCpf(cleanCpf(userModel.getCpf()));
+		userModel.setCreatedDate(LocalDateTime.now(ZoneId.of("UTC")));
+		userModel.setStatus(true);
 	}
 
 	

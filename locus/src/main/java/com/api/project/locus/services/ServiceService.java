@@ -41,6 +41,7 @@ public class ServiceService {
 	public void setDefaults(ServiceModel serviceModel) {
 		serviceModel.setDataInclusao(LocalDateTime.now(ZoneId.of("UTC")));
 		serviceModel.setDataModificacao(LocalDateTime.now(ZoneId.of("UTC")));
+		serviceModel.setStatus(true);
 	}
 
 }

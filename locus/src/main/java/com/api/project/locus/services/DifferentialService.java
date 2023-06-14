@@ -41,6 +41,7 @@ public class DifferentialService {
 	public void setDefaults(DifferentialModel differentialModel) {
 		differentialModel.setDataInclusao(LocalDateTime.now(ZoneId.of("UTC")));
 		differentialModel.setDataModificacao(LocalDateTime.now(ZoneId.of("UTC")));
+		differentialModel.setStatus(true);
 	}
 
 }

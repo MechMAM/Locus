@@ -41,6 +41,7 @@ public class AccessibilityService {
 	public void setDefaults(AccessibilityModel accessibilityModel) {
 		accessibilityModel.setDataInclusao(LocalDateTime.now(ZoneId.of("UTC")));
 		accessibilityModel.setDataModificacao(LocalDateTime.now(ZoneId.of("UTC")));
+		accessibilityModel.setStatus(true);
 	}
 
 }

@@ -48,6 +48,9 @@ public class UserModel implements Serializable{
 	
 	private LocalDateTime createdDate;
 	
+	@Column
+	private boolean status;
+	
 	@ManyToMany(fetch = FetchType.LAZY,
 			cascade = {
 					CascadeType.PERSIST,
@@ -60,10 +63,9 @@ public class UserModel implements Serializable{
 	public UserModel() {
 		super();
 	}
-	
 
 	public UserModel(Long id, String nome, String cpf, String email, String telefone, LocalDate dataNascimento,
-			String senha, LocalDateTime createdDate) {
+			String senha, LocalDateTime createdDate, boolean status, Set<CompanyModel> empresaId) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -73,8 +75,9 @@ public class UserModel implements Serializable{
 		this.dataNascimento = dataNascimento;
 		this.senha = senha;
 		this.createdDate = createdDate;
+		this.status = status;
+		this.empresaId = empresaId;
 	}
-
 
 	public Long getId() {
 		return id;
@@ -131,20 +134,26 @@ public class UserModel implements Serializable{
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	
+
 	public LocalDateTime getCreatedDate() {
 		return createdDate;
 	}
 
-
 	public void setCreatedDate(LocalDateTime createdDate) {
 		this.createdDate = createdDate;
 	}
-	
+
+	public boolean isStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+
 	public Set<CompanyModel> getEmpresaId() {
 		return empresaId;
 	}
-
 
 	public void setEmpresaId(Set<CompanyModel> empresaId) {
 		this.empresaId = empresaId;
@@ -152,6 +161,13 @@ public class UserModel implements Serializable{
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	@Override
+	public String toString() {
+		return "UserModel [id=" + id + ", nome=" + nome + ", cpf=" + cpf + ", email=" + email + ", telefone=" + telefone
+				+ ", dataNascimento=" + dataNascimento + ", senha=" + senha + ", createdDate=" + createdDate
+				+ ", status=" + status + ", empresaId=" + empresaId + "]";
 	}
 
 	@Override
@@ -170,14 +186,5 @@ public class UserModel implements Serializable{
 		UserModel other = (UserModel) obj;
 		return Objects.equals(cpf, other.cpf);
 	}
-
-	@Override
-	public String toString() {
-		return "UserModel [id=" + id + ", nome=" + nome + ", cpf=" + cpf + ", email=" + email + ", telefone=" + telefone
-				+ ", dataNascimento=" + dataNascimento + ", senha=" + senha + "]";
-	}
 	
-	
-	
-
 }

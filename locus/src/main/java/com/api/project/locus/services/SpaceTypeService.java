@@ -41,6 +41,7 @@ public class SpaceTypeService {
 	public void setDefaults(SpaceTypeModel spaceTypeModel) {
 		spaceTypeModel.setDataInclusao(LocalDateTime.now(ZoneId.of("UTC")));
 		spaceTypeModel.setDataModificacao(LocalDateTime.now(ZoneId.of("UTC")));
+		spaceTypeModel.setStatus(true);
 	}
 
 }

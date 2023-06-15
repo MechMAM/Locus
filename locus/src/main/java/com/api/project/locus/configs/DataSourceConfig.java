@@ -14,7 +14,7 @@ public class DataSourceConfig {
                 .driverClassName("org.postgresql.Driver")
                 .url("jdbc:postgresql://localhost:5432/locus_db")
                 .username("postgres")
-                .password("server")
+                .password("123456")
                 .build();
     }
 }

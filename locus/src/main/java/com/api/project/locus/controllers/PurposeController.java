@@ -29,7 +29,7 @@ import jakarta.validation.Valid;
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/api/purpose")
-public class PropositoController {
+public class PurposeController {
 	
 	@Autowired
 	PurposeService purposeService;
@@ -52,7 +52,7 @@ public class PropositoController {
 	public ResponseEntity<Object> getOnePurpose(@PathVariable(value = "id") UUID id){
 		Optional<PurposeModel> PurposeModelOptional = purposeService.findById(id);
 		if (!PurposeModelOptional.isPresent()) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuário não encontrado!");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Propósito não encontrado!");
 		}		
 		return ResponseEntity.status(HttpStatus.OK).body(PurposeModelOptional.get());
 	}
@@ -61,10 +61,10 @@ public class PropositoController {
 	public ResponseEntity<Object> deletePurpose(@PathVariable(value = "id") UUID id){
 		Optional<PurposeModel> purposeModelOptional = purposeService.findById(id);
 		if (!purposeModelOptional.isPresent()) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuário não encontrado!");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Propósito não encontrado!");
 		}
 		purposeService.delete(purposeModelOptional.get());
-		return ResponseEntity.status(HttpStatus.OK).body("Usuário deletado!");
+		return ResponseEntity.status(HttpStatus.OK).body("Propósito deletado!");
 	}
 	
 	@PutMapping("/{id}")
@@ -72,7 +72,7 @@ public class PropositoController {
 											    @RequestBody @Valid PurposeDto purposeDto){
 		Optional<PurposeModel> purposeModelOptional = purposeService.findById(id);
 		if (!purposeModelOptional.isPresent()) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuário não encontrado!");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Propósito não encontrado!");
 		}
 		var purposeModel = new PurposeModel();
 		BeanUtils.copyProperties(purposeDto, purposeModel);

@@ -20,5 +20,3 @@ insert into proposito (prp_nome, prp_descricao) values
 ('Colações de grau','Local para muitas pessoas e com recursos de audiovisuais');
 
 select * from proposito;
-
-

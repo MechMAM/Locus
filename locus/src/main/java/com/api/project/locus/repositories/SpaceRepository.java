@@ -4,8 +4,8 @@ import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.api.project.locus.models.ReviewModel;
+import com.api.project.locus.models.SpaceModel;
 
-public interface ReviewRepository extends JpaRepository<ReviewModel, UUID>{
-
+public interface SpaceRepository extends JpaRepository<SpaceModel, UUID>{
+	
 }

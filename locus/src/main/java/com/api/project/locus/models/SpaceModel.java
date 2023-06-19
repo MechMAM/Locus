@@ -3,8 +3,12 @@ package com.api.project.locus.models;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -14,6 +18,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -51,6 +56,14 @@ public class SpaceModel implements Serializable{
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "fk_endereco_id", nullable = false)
 	private AddressModel endereco;
+	
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "fk_empresa_id", nullable = false)
+	@JsonIgnore
+	private CompanyModel empresa;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "espaco")
+	private Set<BusinessHoursModel> disponibilidade = new HashSet<>();
 	
 	public SpaceModel() {
 		super();
@@ -183,7 +196,6 @@ public class SpaceModel implements Serializable{
 		return serialVersionUID;
 	}
 
-
 	public AddressModel getEndereco() {
 		return endereco;
 	}
@@ -192,14 +204,20 @@ public class SpaceModel implements Serializable{
 		this.endereco = endereco;
 	}
 
-	
-	@Override
-	public String toString() {
-		return "SpaceModel [id=" + id + ", nome=" + nome + ", descricao=" + descricao + ", descricaoArredores="
-				+ descricaoArredores + ", capacidade=" + capacidade + ", area=" + area + ", tempoLimpeza="
-				+ tempoLimpeza + ", taxaLimpeza=" + taxaLimpeza + ", hasTaxaLimpeza=" + hasTaxaLimpeza
-				+ ", precoHorario=" + precoHorario + ", dataInclusao=" + dataInclusao + ", dataModificacao="
-				+ dataModificacao + ", status=" + status + ", endereco=" + endereco + "]";
+	public CompanyModel getEmpresa() {
+		return empresa;
+	}
+
+	public void setEmpresa(CompanyModel empresa) {
+		this.empresa = empresa;
+	}
+
+	public Set<BusinessHoursModel> getDisponibilidade() {
+		return disponibilidade;
+	}
+
+	public void setDisponibilidade(Set<BusinessHoursModel> disponibilidade) {
+		this.disponibilidade = disponibilidade;
 	}
 
 	@Override
@@ -218,5 +236,17 @@ public class SpaceModel implements Serializable{
 		SpaceModel other = (SpaceModel) obj;
 		return Objects.equals(id, other.id);
 	}
+
+	@Override
+	public String toString() {
+		return "SpaceModel [id=" + id + ", nome=" + nome + ", descricao=" + descricao + ", descricaoArredores="
+				+ descricaoArredores + ", capacidade=" + capacidade + ", area=" + area + ", tempoLimpeza="
+				+ tempoLimpeza + ", taxaLimpeza=" + taxaLimpeza + ", hasTaxaLimpeza=" + hasTaxaLimpeza
+				+ ", precoHorario=" + precoHorario + ", dataInclusao=" + dataInclusao + ", dataModificacao="
+				+ dataModificacao + ", status=" + status + ", endereco=" + endereco + ", empresa=" + empresa
+				+ ", disponibilidade=" + disponibilidade + "]";
+	}
+	
+	
 	
 }

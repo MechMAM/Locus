@@ -7,9 +7,12 @@ import java.util.UUID;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -31,6 +34,18 @@ public class BookingModel implements Serializable{
 	private LocalDateTime dataInclusao;
 	@Column
 	private LocalDateTime dataModificacao;
+	
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "fk_espaco_id", nullable = false)
+	private SpaceModel espaco;
+	
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "fk_usuario_id", nullable = false)
+	private UserModel usuario;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "fk_avaliacao_id")
+	private ReviewModel avaliacao;
 	
 	public BookingModel() {
 		super();
@@ -106,6 +121,30 @@ public class BookingModel implements Serializable{
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+	
+	public SpaceModel getEspaco() {
+		return espaco;
+	}
+
+	public void setEspaco(SpaceModel espaco) {
+		this.espaco = espaco;
+	}
+
+	public UserModel getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(UserModel usuario) {
+		this.usuario = usuario;
+	}
+
+	public ReviewModel getAvaliacao() {
+		return avaliacao;
+	}
+
+	public void setAvaliacao(ReviewModel avaliacao) {
+		this.avaliacao = avaliacao;
 	}
 
 	@Override

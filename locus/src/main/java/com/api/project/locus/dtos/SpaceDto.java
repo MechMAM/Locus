@@ -26,6 +26,8 @@ public class SpaceDto {
 	private double precoHorario;
 	@NotNull
 	private UUID enderecoId;
+	@NotNull
+	private UUID empresaId;
 	
 	public String getNome() {
 		return nome;
@@ -86,6 +88,12 @@ public class SpaceDto {
 	}
 	public void setEnderecoId(UUID enderecoId) {
 		this.enderecoId = enderecoId;
+	}
+	public UUID getEmpresaId() {
+		return empresaId;
+	}
+	public void setEmpresaId(UUID empresaId) {
+		this.empresaId = empresaId;
 	}
 	
 

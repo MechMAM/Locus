@@ -1,6 +1,7 @@
 package com.api.project.locus.dtos;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 import jakarta.validation.constraints.NotNull;
 
@@ -12,6 +13,11 @@ public class BookingDto {
 	private LocalDateTime dataFim;
 	@NotNull
 	private String timeZone;
+	@NotNull
+	private UUID espacoId;
+	@NotNull
+	private Long usuarioId;
+	private UUID avaliacaoId;
 	
 	public LocalDateTime getDataInicio() {
 		return dataInicio;
@@ -30,6 +36,24 @@ public class BookingDto {
 	}
 	public void setTimeZone(String timeZone) {
 		this.timeZone = timeZone;
+	}
+	public UUID getEspacoId() {
+		return espacoId;
+	}
+	public void setEspacoId(UUID espacoId) {
+		this.espacoId = espacoId;
+	}
+	public Long getUsuarioId() {
+		return usuarioId;
+	}
+	public void setUsuarioId(Long usuarioId) {
+		this.usuarioId = usuarioId;
+	}
+	public UUID getAvaliacaoId() {
+		return avaliacaoId;
+	}
+	public void setAvaliacaoId(UUID avaliacaoId) {
+		this.avaliacaoId = avaliacaoId;
 	}
 	
 	

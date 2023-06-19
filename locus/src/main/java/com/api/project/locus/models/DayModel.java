@@ -47,8 +47,7 @@ public class DayModel implements Serializable{
 	
 	@Column
 	private LocalDateTime dataModificacao;
-
-
+	
 	public DayModel() {
 		super();
 	}

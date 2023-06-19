@@ -12,8 +12,8 @@ import org.springframework.stereotype.Service;
 
 import com.api.project.locus.dtos.SpaceDto;
 import com.api.project.locus.models.AddressModel;
+import com.api.project.locus.models.CompanyModel;
 import com.api.project.locus.models.SpaceModel;
-import com.api.project.locus.repositories.AddressRepository;
 import com.api.project.locus.repositories.SpaceRepository;
 
 import jakarta.transaction.Transactional;
@@ -24,7 +24,9 @@ public class SpaceService {
 	@Autowired
 	SpaceRepository spaceRepository;
 	@Autowired
-	AddressRepository addressRepository;
+	AddressService addressService;
+	@Autowired
+	CompanyService companyService;
 	
 	@Transactional
 	public SpaceModel save(SpaceModel spaceModel) {
@@ -53,8 +55,10 @@ public class SpaceService {
 	public SpaceModel convertToEntity(SpaceDto spaceDto) {
 		SpaceModel spaceModel = new SpaceModel();
 		BeanUtils.copyProperties(spaceDto, spaceModel);
-		Optional<AddressModel> addressModel = addressRepository.findById(spaceDto.getEnderecoId());
+		Optional<AddressModel> addressModel = addressService.findById(spaceDto.getEnderecoId());
+		Optional<CompanyModel> companyModel = companyService.findById(spaceDto.getEmpresaId());
 		spaceModel.setEndereco(addressModel.get());
+		spaceModel.setEmpresa(companyModel.get());
 		return spaceModel;				
 	}
 

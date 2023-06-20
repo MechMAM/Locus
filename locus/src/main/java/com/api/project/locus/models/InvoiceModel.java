@@ -2,14 +2,20 @@ package com.api.project.locus.models;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -29,6 +35,13 @@ public class InvoiceModel implements Serializable{
 	private LocalDateTime dataInclusao;
 	@Column
 	private LocalDateTime dataModificacao;
+	
+	@OneToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "fk_reserva_id", nullable = false)
+	private BookingModel reserva;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "titulo")
+	private Set<ChargingMethodModel> metodosCobranca = new HashSet<>();
 
 		public InvoiceModel() {
 		super();
@@ -69,14 +82,6 @@ public class InvoiceModel implements Serializable{
 		this.valorPagamento = valorPagamento;
 	}
 
-	public String isStatusPagamento() {
-		return statusPagamento;
-	}
-
-	public void setStatusPagamento(String statusPagamento) {
-		this.statusPagamento = statusPagamento;
-	}
-
 	public LocalDateTime getDataInclusao() {
 		return dataInclusao;
 	}
@@ -95,6 +100,30 @@ public class InvoiceModel implements Serializable{
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+	
+	public String getStatusPagamento() {
+		return statusPagamento;
+	}
+
+	public void setStatusPagamento(String statusPagamento) {
+		this.statusPagamento = statusPagamento;
+	}
+
+	public BookingModel getReserva() {
+		return reserva;
+	}
+
+	public void setReserva(BookingModel reserva) {
+		this.reserva = reserva;
+	}
+
+	public Set<ChargingMethodModel> getMetodosCobranca() {
+		return metodosCobranca;
+	}
+
+	public void setMetodosCobranca(Set<ChargingMethodModel> metodosCobranca) {
+		this.metodosCobranca = metodosCobranca;
 	}
 
 	@Override

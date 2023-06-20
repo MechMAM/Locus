@@ -5,11 +5,16 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -19,14 +24,19 @@ public class ChargingMethodModel implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private UUID id;
-	@Column
+	@Column(nullable = false)
 	private String tipoCobranca;
-	@Column
+	@Column(nullable = false)
 	private LocalDateTime dataVencimento;
 	@Column
 	private LocalDateTime dataInclusao;
 	@Column
 	private LocalDateTime dataModificacao;
+	
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "fk_titulo_id", nullable = false)
+	@JsonIgnore
+	private InvoiceModel titulo;
 	
 	public ChargingMethodModel() {
 		super();
@@ -84,6 +94,14 @@ public class ChargingMethodModel implements Serializable{
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+	
+	public InvoiceModel getTitulo() {
+		return titulo;
+	}
+
+	public void setTitulo(InvoiceModel titulo) {
+		this.titulo = titulo;
 	}
 
 	@Override

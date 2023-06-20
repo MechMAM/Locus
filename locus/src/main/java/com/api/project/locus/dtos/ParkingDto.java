@@ -1,5 +1,7 @@
 package com.api.project.locus.dtos;
 
+import java.util.UUID;
+
 import jakarta.validation.constraints.NotNull;
 
 public class ParkingDto {
@@ -14,6 +16,9 @@ public class ParkingDto {
 	
 	@NotNull
 	private Boolean gratuito;
+	
+	@NotNull
+	private UUID espacoId;
 
 	public int getQuantidadeVagas() {
 		return quantidadeVagas;
@@ -54,5 +59,15 @@ public class ParkingDto {
 	public void setGratuito(Boolean gratuito) {
 		this.gratuito = gratuito;
 	}
+
+	public UUID getEspacoId() {
+		return espacoId;
+	}
+
+	public void setEspacoId(UUID espacoId) {
+		this.espacoId = espacoId;
+	}
+	
+	
 			
 }

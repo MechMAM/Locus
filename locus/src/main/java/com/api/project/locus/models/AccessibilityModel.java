@@ -35,6 +35,15 @@ public class AccessibilityModel implements Serializable{
 	
 	@Column
 	private boolean status;
+	
+//	@ManyToMany(fetch = FetchType.LAZY,
+//			cascade = {
+//					CascadeType.PERSIST,
+//					CascadeType.MERGE
+//					},
+//			mappedBy = "acessibilidades")
+//	@JsonIgnore
+//	private Set<SpaceModel> espacosAcessibilidade = new HashSet<>();;
 
 	public AccessibilityModel() {
 		super();
@@ -102,6 +111,14 @@ public class AccessibilityModel implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+
+//	public Set<SpaceModel> getEspacosAcessibilidade() {
+//		return espacosAcessibilidade;
+//	}
+//
+//	public void setEspacosAcessibilidade(Set<SpaceModel> espacosAcessibilidade) {
+//		this.espacosAcessibilidade = espacosAcessibilidade;
+//	}
 
 	@Override
 	public String toString() {

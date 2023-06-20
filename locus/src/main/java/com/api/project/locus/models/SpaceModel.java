@@ -10,6 +10,7 @@ import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -17,6 +18,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -64,6 +67,59 @@ public class SpaceModel implements Serializable{
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "espaco")
 	private Set<BusinessHoursModel> disponibilidade = new HashSet<>();
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "espaco")
+	private Set<ImageModel> imagens = new HashSet<>();
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "espaco")
+	private Set<ParkingModel> estacionamentos = new HashSet<>();
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "espaco")
+	private Set<SpaceHasServiceModel> servicos = new HashSet<>();
+
+	@ManyToMany(fetch = FetchType.LAZY,
+			cascade = {
+					CascadeType.PERSIST,
+					CascadeType.MERGE
+					})
+	@JoinTable(
+			  name = "espaco_has_acessibilidade", 
+			  joinColumns = @JoinColumn(name = "espaco_id", referencedColumnName = "id"), 
+			  inverseJoinColumns = @JoinColumn(name = "acessibilidade_id", referencedColumnName = "id"))
+	private Set<AccessibilityModel> acessibilidades = new HashSet<>();
+	
+	@ManyToMany(fetch = FetchType.LAZY,
+			cascade = {
+					CascadeType.PERSIST,
+					CascadeType.MERGE
+					})
+	@JoinTable(
+			  name = "espaco_has_proposito", 
+			  joinColumns = @JoinColumn(name = "espaco_id", referencedColumnName = "id"), 
+			  inverseJoinColumns = @JoinColumn(name = "proposito_id", referencedColumnName = "id"))
+	private Set<PurposeModel> propositos = new HashSet<>();;
+	
+	@ManyToMany(fetch = FetchType.LAZY,
+			cascade = {
+					CascadeType.PERSIST,
+					CascadeType.MERGE
+					})
+	@JoinTable(
+			  name = "espaco_has_tipo_espaco", 
+			  joinColumns = @JoinColumn(name = "espaco_id", referencedColumnName = "id"), 
+			  inverseJoinColumns = @JoinColumn(name = "tipo_espaco_id", referencedColumnName = "id"))
+	private Set<SpaceTypeModel> tiposDoEspaco = new HashSet<>();;
+	
+	@ManyToMany(fetch = FetchType.LAZY,
+			cascade = {
+					CascadeType.PERSIST,
+					CascadeType.MERGE
+					})
+	@JoinTable(
+			  name = "espaco_has_diferencial", 
+			  joinColumns = @JoinColumn(name = "espaco_id", referencedColumnName = "id"), 
+			  inverseJoinColumns = @JoinColumn(name = "diferenciais_id", referencedColumnName = "id"))
+	private Set<DifferentialModel> diferenciais = new HashSet<>();;
 	
 	public SpaceModel() {
 		super();
@@ -218,6 +274,62 @@ public class SpaceModel implements Serializable{
 
 	public void setDisponibilidade(Set<BusinessHoursModel> disponibilidade) {
 		this.disponibilidade = disponibilidade;
+	}
+
+	public Set<SpaceHasServiceModel> getServicos() {
+		return servicos;
+	}
+
+	public void setServicos(Set<SpaceHasServiceModel> servicos) {
+		this.servicos = servicos;
+	}
+
+	public Set<ImageModel> getImagens() {
+		return imagens;
+	}
+
+	public void setImagens(Set<ImageModel> imagens) {
+		this.imagens = imagens;
+	}
+
+	public Set<ParkingModel> getEstacionamentos() {
+		return estacionamentos;
+	}
+
+	public void setEstacionamentos(Set<ParkingModel> estacionamentos) {
+		this.estacionamentos = estacionamentos;
+	}
+
+	public Set<AccessibilityModel> getAcessibilidades() {
+		return acessibilidades;
+	}
+
+	public void setAcessibilidades(Set<AccessibilityModel> acessibilidades) {
+		this.acessibilidades = acessibilidades;
+	}
+
+	public Set<PurposeModel> getPropositos() {
+		return propositos;
+	}
+
+	public void setPropositos(Set<PurposeModel> propositos) {
+		this.propositos = propositos;
+	}
+
+	public Set<SpaceTypeModel> getTiposDoEspaco() {
+		return tiposDoEspaco;
+	}
+
+	public void setTiposDoEspaco(Set<SpaceTypeModel> tiposDoEspaco) {
+		this.tiposDoEspaco = tiposDoEspaco;
+	}
+
+	public Set<DifferentialModel> getDiferenciais() {
+		return diferenciais;
+	}
+
+	public void setDiferenciais(Set<DifferentialModel> diferenciais) {
+		this.diferenciais = diferenciais;
 	}
 
 	@Override

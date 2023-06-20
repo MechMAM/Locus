@@ -13,6 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -43,7 +44,7 @@ public class BookingModel implements Serializable{
 	@JoinColumn(name = "fk_usuario_id", nullable = false)
 	private UserModel usuario;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "fk_avaliacao_id")
 	private ReviewModel avaliacao;
 	
@@ -54,13 +55,9 @@ public class BookingModel implements Serializable{
 	public BookingModel(UUID id, LocalDateTime dataInicio, LocalDateTime dataFim, String timeZone, double preco,
 			LocalDateTime dataInclusao, LocalDateTime dataModificacao) {
 		super();
-		this.id = id;
 		this.dataInicio = dataInicio;
 		this.dataFim = dataFim;
 		this.timeZone = timeZone;
-		this.preco = preco;
-		this.dataInclusao = dataInclusao;
-		this.dataModificacao = dataModificacao;
 	}
 
 	public UUID getId() {

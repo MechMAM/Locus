@@ -37,7 +37,7 @@ public class ParkingController {
 	@PostMapping
 	public ResponseEntity<Object> saveParking(@RequestBody @Valid ParkingDto parkingDto){
 		var parkingModel = new ParkingModel();
-		BeanUtils.copyProperties(parkingDto, parkingModel);
+		parkingService.convertDtoToEntity(parkingDto, parkingModel);
 		parkingService.setDefaults(parkingModel);
 		return ResponseEntity.status(HttpStatus.CREATED).body(parkingService.save(parkingModel));
 	}

@@ -50,7 +50,7 @@ public class CompanyModel implements Serializable{
 			  inverseJoinColumns = @JoinColumn(name = "usuario_usu_id", referencedColumnName = "id"))
 	private Set<UserModel> usuarioId = new HashSet<>();
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "empresa")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "empresa")
 	private Set<SpaceModel> espacosDaEmpresa = new HashSet<>();
 
 	public CompanyModel() {
@@ -127,6 +127,14 @@ public class CompanyModel implements Serializable{
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public Set<SpaceModel> getEspacosDaEmpresa() {
+		return espacosDaEmpresa;
+	}
+
+	public void setEspacosDaEmpresa(Set<SpaceModel> espacosDaEmpresa) {
+		this.espacosDaEmpresa = espacosDaEmpresa;
 	}
 
 	@Override

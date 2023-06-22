@@ -56,7 +56,7 @@ public class SpaceModel implements Serializable{
 	@Column
 	private boolean status;
 	
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "fk_endereco_id", nullable = false)
 	private AddressModel endereco;
 	

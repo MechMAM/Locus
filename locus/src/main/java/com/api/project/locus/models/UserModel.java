@@ -16,56 +16,65 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "Usuario")
-public class UserModel implements Serializable{
+@Table(	name = "Usuario")
+public class UserModel implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
-	@Column(nullable = false, length = 50)
+
+	@Column(nullable = true, length = 50)
 	private String nome;
-	
-	@Column(nullable = false, unique = true, length = 15)
+
+	@Column(nullable = true, unique = true, length = 15)
 	private String cpf;
-	
+
 	@Column(nullable = false, unique = true, length = 60)
 	private String email;
-	
-	@Column(nullable = false, length = 20)
+
+	@Column(nullable = true, length = 20)
 	private String telefone;
-	
+
 	@Column
 	private LocalDate dataNascimento;
 	
+	@Column(nullable = false, unique = true, length = 50)
+	private String username;
+
 	@Column(nullable = false, length = 255)
 	private String senha;
-	
+
 	private LocalDateTime createdDate;
-	
+
 	@Column
 	private boolean status;
-	
-	@ManyToMany(fetch = FetchType.LAZY,
-			cascade = {
-					CascadeType.PERSIST,
-					CascadeType.MERGE
-					},
+
+	@ManyToMany(
+			fetch = FetchType.LAZY, 
+			cascade = { CascadeType.PERSIST, CascadeType.MERGE }, 
 			mappedBy = "usuarioId")
 	@JsonIgnore
-	private Set<CompanyModel> empresaId = new HashSet<>();;
-	
+	private Set<CompanyModel> empresaId = new HashSet<>();
+
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "usuario_has_acesso", 
+				joinColumns = @JoinColumn(name = "usuario_id"), 
+				inverseJoinColumns = @JoinColumn(name = "tipo_acesso_id"))
+	private Set<AccessTypeModel> acessos = new HashSet<>();
+
 	public UserModel() {
 		super();
 	}
 
 	public UserModel(Long id, String nome, String cpf, String email, String telefone, LocalDate dataNascimento,
-			String senha, LocalDateTime createdDate, boolean status, Set<CompanyModel> empresaId) {
+			String username, String senha, LocalDateTime createdDate, boolean status) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -73,10 +82,16 @@ public class UserModel implements Serializable{
 		this.email = email;
 		this.telefone = telefone;
 		this.dataNascimento = dataNascimento;
+		this.username = username;
 		this.senha = senha;
 		this.createdDate = createdDate;
 		this.status = status;
-		this.empresaId = empresaId;
+	}
+
+	public UserModel(String username, String email, String senha) {
+		this.username = username;
+		this.email = email;
+		this.senha = senha;
 	}
 
 	public Long getId() {
@@ -127,6 +142,14 @@ public class UserModel implements Serializable{
 		this.dataNascimento = dataNascimento;
 	}
 
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
 	public String getSenha() {
 		return senha;
 	}
@@ -158,6 +181,14 @@ public class UserModel implements Serializable{
 	public void setEmpresaId(Set<CompanyModel> empresaId) {
 		this.empresaId = empresaId;
 	}
+	
+	public Set<AccessTypeModel> getAcessos() {
+		return acessos;
+	}
+
+	public void setAcessos(Set<AccessTypeModel> acessos) {
+		this.acessos = acessos;
+	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
@@ -186,5 +217,5 @@ public class UserModel implements Serializable{
 		UserModel other = (UserModel) obj;
 		return Objects.equals(cpf, other.cpf);
 	}
-	
+
 }

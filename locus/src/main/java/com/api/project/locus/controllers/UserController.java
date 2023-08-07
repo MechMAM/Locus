@@ -10,11 +10,11 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,13 +34,8 @@ public class UserController {
 	@Autowired
 	UserService userService;
 	
-	@PostMapping
-	public ResponseEntity<Object> saveUser(@RequestBody @Valid UserDto userDto){
-		var userModel = new UserModel();
-		BeanUtils.copyProperties(userDto, userModel);
-		userService.setDefaults(userModel);
-		return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(userModel));
-	}
+	@Autowired
+	PasswordEncoder encoder;
 	
 	@GetMapping
 	public ResponseEntity<Page<UserModel>> getAllUsers(@PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.ASC) Pageable pageable){
@@ -76,8 +71,11 @@ public class UserController {
 		}
 		var userModel = new UserModel();
 		BeanUtils.copyProperties(userDto, userModel);
+		userModel.setSenha(encoder.encode(userDto.getSenha()));
+		userService.setRoles(userModel, userDto.getAcessos());
 		userModel.setId(userModelOptional.get().getId());
 		userModel.setCreatedDate(userModelOptional.get().getCreatedDate());
+		userModel.setStatus(true);
 		return ResponseEntity.status(HttpStatus.OK).body(userService.save(userModel));
 	}
 }

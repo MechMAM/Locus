@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
 
 import org.springframework.beans.BeanUtils;
@@ -11,8 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.api.project.locus.dtos.SpaceDto;
+import com.api.project.locus.models.AccessibilityModel;
 import com.api.project.locus.models.AddressModel;
 import com.api.project.locus.models.CompanyModel;
+import com.api.project.locus.models.DifferentialModel;
+import com.api.project.locus.models.PurposeModel;
 import com.api.project.locus.models.SpaceModel;
 import com.api.project.locus.repositories.SpaceRepository;
 
@@ -27,6 +31,12 @@ public class SpaceService {
 	AddressService addressService;
 	@Autowired
 	CompanyService companyService;
+	@Autowired
+	PurposeService purposeService;
+	@Autowired
+	DifferentialService differentialService;
+	@Autowired
+	AccessibilityService accessibilityService;
 	
 	@Transactional
 	public SpaceModel save(SpaceModel spaceModel) {
@@ -55,11 +65,43 @@ public class SpaceService {
 	public SpaceModel convertToEntity(SpaceDto spaceDto) {
 		SpaceModel spaceModel = new SpaceModel();
 		BeanUtils.copyProperties(spaceDto, spaceModel);
-		Optional<AddressModel> addressModel = addressService.findById(spaceDto.getEnderecoId());
-		Optional<CompanyModel> companyModel = companyService.findById(spaceDto.getEmpresaId());
-		spaceModel.setEndereco(addressModel.get());
-		spaceModel.setEmpresa(companyModel.get());
+		setEndereco(spaceDto.getEnderecoId(), spaceModel);
+		setEmpresa(spaceDto.getEmpresaId(),spaceModel);
+		setDiferenciais(spaceDto.getDiferenciais(), spaceModel);
+		setAcessibilidades(spaceDto.getAcessibilidades(), spaceModel);
+		setPropositos(spaceDto.getPropositos(), spaceModel);
 		return spaceModel;				
+	}
+	
+	private void setPropositos(Set<UUID> propositos, SpaceModel spaceModel) {
+		propositos.forEach(propositoId -> {
+			Optional<PurposeModel> purposeModel = purposeService.findById(propositoId);
+			spaceModel.getPropositos().add(purposeModel.get());
+		});
+	}
+
+	private void setAcessibilidades(Set<UUID> acessibilidades, SpaceModel spaceModel) {
+		acessibilidades.forEach(acessibilidadeId -> {
+			Optional<AccessibilityModel> accessibilityModel = accessibilityService.findById(acessibilidadeId);
+			spaceModel.getAcessibilidades().add(accessibilityModel.get());
+		});
+	}
+
+	private void setDiferenciais(Set<UUID> diferenciais, SpaceModel spaceModel) {
+		diferenciais.forEach(diferencialId -> {
+			Optional<DifferentialModel> differentialModel = differentialService.findById(diferencialId);
+			spaceModel.getDiferenciais().add(differentialModel.get());
+		});
+	}
+
+	private void setEndereco(UUID adressId, SpaceModel spaceModel) {
+		Optional<AddressModel> addressModel = addressService.findById(adressId);
+		spaceModel.setEndereco(addressModel.get());
+	}
+	
+	private void setEmpresa(UUID companyId, SpaceModel spaceModel) {
+		Optional<CompanyModel> companyModel = companyService.findById(companyId);
+		spaceModel.setEmpresa(companyModel.get());
 	}
 
 }

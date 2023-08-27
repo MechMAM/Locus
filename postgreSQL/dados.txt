@@ -1,0 +1,187 @@
+[
+    {
+        "id": "e430243b-c122-4e63-9d53-bdf770c50f51",
+        "nome": "entrada",
+        "descricao": "Entrada sem degraus",
+        "dataInclusao": "2023-08-27T19:32:19Z",
+        "dataModificacao": "2023-08-27T19:32:19Z",
+        "status": true
+    },
+    {
+        "id": "d4caa159-6b47-431b-bcb8-9bcd67a09fc7",
+        "nome": "portas_largas",
+        "descricao": "Portas com mais de 81cm",
+        "dataInclusao": "2023-08-27T19:32:28Z",
+        "dataModificacao": "2023-08-27T19:32:28Z",
+        "status": true
+    },
+    {
+        "id": "3a12efab-bc4c-404f-9995-70b1e33f2365",
+        "nome": "acesso_palco",
+        "descricao": "Acesso ao palco sem degraus",
+        "dataInclusao": "2023-08-27T19:32:36Z",
+        "dataModificacao": "2023-08-27T19:32:36Z",
+        "status": true
+    },
+    {
+        "id": "0c4a522c-6ed2-4272-8f5b-9f786b47ea27",
+        "nome": "banheiros",
+        "descricao": "Banheiros Acessíveis",
+        "dataInclusao": "2023-08-27T19:32:42Z",
+        "dataModificacao": "2023-08-27T19:32:42Z",
+        "status": true
+    },
+    {
+        "id": "31b4dcc7-9144-4a08-8051-8e6305cc22ae",
+        "nome": "estacionamento_pcd",
+        "descricao": "Vagas de estacionamento para PCD",
+        "dataInclusao": "2023-08-27T19:32:50Z",
+        "dataModificacao": "2023-08-27T19:32:50Z",
+        "status": true
+    }
+]
+
+[
+    {
+        "id": "6e1fbc16-1344-4fe0-9643-ad699afb5d3a",
+        "nome": "Palestras",
+        "descricao": "Local semelhante a um auditório",
+        "dataInclusao": "2023-08-27T19:33:28Z",
+        "dataModificacao": "2023-08-27T19:33:28Z",
+        "status": true
+    },
+    {
+        "id": "b2082dd4-0a10-43e3-8432-d38aa50547bb",
+        "nome": "Seminários",
+        "descricao": "Local com bons projetores e recursos audiovisuais",
+        "dataInclusao": "2023-08-27T19:33:37Z",
+        "dataModificacao": "2023-08-27T19:33:37Z",
+        "status": true
+    },
+    {
+        "id": "b3d8c455-a7b7-455b-9667-3b57d7d55c18",
+        "nome": "Peças Teatrais",
+        "descricao": "Local com equipamentos de palco e boa acústica para apresentações",
+        "dataInclusao": "2023-08-27T19:33:54Z",
+        "dataModificacao": "2023-08-27T19:33:54Z",
+        "status": true
+    },
+    {
+        "id": "3778968f-2ea2-4a41-8503-c923541df614",
+        "nome": "Convenções",
+        "descricao": "Local com boa área para mostra e circulação de pessoas",
+        "dataInclusao": "2023-08-27T19:34:07Z",
+        "dataModificacao": "2023-08-27T19:34:07Z",
+        "status": true
+    },
+    {
+        "id": "73fb05b1-5f2f-42af-9f6c-4ea1901e011f",
+        "nome": "Recitais",
+        "descricao": "Local com boa acústica e equipamentos para apresentações",
+        "dataInclusao": "2023-08-27T19:34:15Z",
+        "dataModificacao": "2023-08-27T19:34:15Z",
+        "status": true
+    },
+    {
+        "id": "2b64278b-759e-4772-b8ad-f9b6f5092db4",
+        "nome": "Eventos empresariais",
+        "descricao": "Local adequado para apresentações empresariais",
+        "dataInclusao": "2023-08-27T19:34:29Z",
+        "dataModificacao": "2023-08-27T19:34:29Z",
+        "status": true
+    },
+    {
+        "id": "c79cc3ba-f03b-4875-bcc4-40776a9bc7c4",
+        "nome": "Colações de grau",
+        "descricao": "Local para muitas pessoas e com recursos de audiovisuais",
+        "dataInclusao": "2023-08-27T19:34:38Z",
+        "dataModificacao": "2023-08-27T19:34:38Z",
+        "status": true
+    }
+]
+
+
+[
+    {
+        "id": "19805922-e949-4b60-8cf8-6f2561d088ef",
+        "nome": "Equipe de Palco",
+        "descricao": "Staff para montagem de equipamentos, ajuste da infraestrutura do local.",
+        "dataInclusao": "2023-08-27T19:35:00Z",
+        "dataModificacao": "2023-08-27T19:35:00Z",
+        "espacos": [],
+        "status": true
+    },
+    {
+        "id": "86f519ad-e216-4651-83d5-14157683695e",
+        "nome": "Coffe Break",
+        "descricao": "Suprimento de doces e salgados de acordo com a capacidade do espaço.",
+        "dataInclusao": "2023-08-27T19:35:08Z",
+        "dataModificacao": "2023-08-27T19:35:08Z",
+        "espacos": [],
+        "status": true
+    },
+    {
+        "id": "2b6142a3-29fc-46cb-ae66-ecfdfe2800a7",
+        "nome": "Recursos de áudio",
+        "descricao": "Caixas de som, microfone, mesa de som.",
+        "dataInclusao": "2023-08-27T19:35:15Z",
+        "dataModificacao": "2023-08-27T19:35:15Z",
+        "espacos": [],
+        "status": true
+    },
+    {
+        "id": "57b60ce8-a7d1-45ae-8aac-7dfb01ee819e",
+        "nome": "Recursos de iluminação",
+        "descricao": "Equipamentos de iluminação de palco para apresentações",
+        "dataInclusao": "2023-08-27T19:35:24Z",
+        "dataModificacao": "2023-08-27T19:35:24Z",
+        "espacos": [],
+        "status": true
+    },
+    {
+        "id": "d9d81a72-4900-4d8e-8157-843f02ab50da",
+        "nome": "Recursos de tradução simultânea",
+        "descricao": "Serviço de tradução para palestras em inglês e espanhol",
+        "dataInclusao": "2023-08-27T19:35:32Z",
+        "dataModificacao": "2023-08-27T19:35:32Z",
+        "espacos": [],
+        "status": true
+    },
+    {
+        "id": "3d879052-cc35-4158-b1c0-f13e25b5adca",
+        "nome": "Recursos de vídeo",
+        "descricao": "Serviço de filmagem e transmissão em vídeo",
+        "dataInclusao": "2023-08-27T19:35:40Z",
+        "dataModificacao": "2023-08-27T19:35:40Z",
+        "espacos": [],
+        "status": true
+    }
+]
+
+
+[
+    {
+        "id": "16ef3544-d292-4c62-a7d8-41a1ff862fd8",
+        "nome": "Espaço Kids",
+        "descricao": "Espaço com brinquedos para crianças",
+        "dataInclusao": "2023-08-27T20:42:23Z",
+        "dataModificacao": "2023-08-27T20:42:23Z",
+        "status": true
+    },
+    {
+        "id": "2a009960-5019-4f44-9a7d-682b947cb5ce",
+        "nome": "Fraldário",
+        "descricao": "Espaço para troca e higienização de bebês",
+        "dataInclusao": "2023-08-27T20:42:48Z",
+        "dataModificacao": "2023-08-27T20:42:48Z",
+        "status": true
+    },
+    {
+        "id": "2ecdced2-f5f2-477a-a784-e0836f704e2a",
+        "nome": "Banheiro Família",
+        "descricao": "Banheiro adequado para família com crianças",
+        "dataInclusao": "2023-08-27T20:43:02Z",
+        "dataModificacao": "2023-08-27T20:43:02Z",
+        "status": true
+    }
+]

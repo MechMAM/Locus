@@ -1,6 +1,8 @@
 package com.api.project.locus.dtos;
 
 import java.time.LocalTime;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 import jakarta.validation.constraints.NotBlank;
@@ -28,6 +30,13 @@ public class SpaceDto {
 	private UUID enderecoId;
 	@NotNull
 	private UUID empresaId;
+	
+	@NotNull
+	private Set<UUID> acessibilidades = new HashSet<>();
+	@NotNull
+	private Set<UUID> diferenciais = new HashSet<>();
+	@NotNull
+	private Set<UUID> propositos = new HashSet<>();
 	
 	public String getNome() {
 		return nome;
@@ -95,6 +104,25 @@ public class SpaceDto {
 	public void setEmpresaId(UUID empresaId) {
 		this.empresaId = empresaId;
 	}
+	public Set<UUID> getAcessibilidades() {
+		return acessibilidades;
+	}
+	public void setAcessibilidades(Set<UUID> acessibilidades) {
+		this.acessibilidades = acessibilidades;
+	}
+	public Set<UUID> getDiferenciais() {
+		return diferenciais;
+	}
+	public void setDiferenciais(Set<UUID> diferenciais) {
+		this.diferenciais = diferenciais;
+	}
+	public Set<UUID> getPropositos() {
+		return propositos;
+	}
+	public void setPropositos(Set<UUID> propositos) {
+		this.propositos = propositos;
+	}
+	
 	
 
 	

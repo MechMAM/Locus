@@ -65,16 +65,16 @@ public class SpaceModel implements Serializable{
 	@JsonIgnore
 	private CompanyModel empresa;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "espaco")
+	@OneToMany(mappedBy = "espaco")
 	private Set<BusinessHoursModel> disponibilidade = new HashSet<>();
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "espaco")
+	@OneToMany(mappedBy = "espaco")
 	private Set<ImageModel> imagens = new HashSet<>();
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "espaco")
+	@OneToMany(mappedBy = "espaco")
 	private Set<ParkingModel> estacionamentos = new HashSet<>();
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "espaco")
+	@OneToMany(mappedBy = "espaco")
 	private Set<SpaceHasServiceModel> servicos = new HashSet<>();
 
 	@ManyToMany(fetch = FetchType.LAZY,

@@ -3,6 +3,7 @@ package com.api.project.locus.models;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
+import java.util.TimeZone;
 import java.util.UUID;
 
 import jakarta.persistence.Column;
@@ -28,7 +29,7 @@ public class BookingModel implements Serializable{
 	@Column(nullable = false)
 	private LocalDateTime dataFim;
 	@Column(nullable = false)
-	private String timeZone;
+	private TimeZone timeZone;
 	@Column
 	private double preco;
 	@Column
@@ -36,15 +37,15 @@ public class BookingModel implements Serializable{
 	@Column
 	private LocalDateTime dataModificacao;
 	
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@ManyToOne(fetch = FetchType.EAGER, optional = false)
 	@JoinColumn(name = "fk_espaco_id", nullable = false)
 	private SpaceModel espaco;
 	
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@ManyToOne(fetch = FetchType.EAGER, optional = false)
 	@JoinColumn(name = "fk_usuario_id", nullable = false)
 	private UserModel usuario;
 	
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_avaliacao_id")
 	private ReviewModel avaliacao;
 	
@@ -52,7 +53,7 @@ public class BookingModel implements Serializable{
 		super();
 	}
 
-	public BookingModel(UUID id, LocalDateTime dataInicio, LocalDateTime dataFim, String timeZone, double preco,
+	public BookingModel(UUID id, LocalDateTime dataInicio, LocalDateTime dataFim, TimeZone timeZone, double preco,
 			LocalDateTime dataInclusao, LocalDateTime dataModificacao) {
 		super();
 		this.dataInicio = dataInicio;
@@ -84,11 +85,11 @@ public class BookingModel implements Serializable{
 		this.dataFim = dataFim;
 	}
 
-	public String getTimeZone() {
+	public TimeZone getTimeZone() {
 		return timeZone;
 	}
 
-	public void setTimeZone(String timeZone) {
+	public void setTimeZone(TimeZone timeZone) {
 		this.timeZone = timeZone;
 	}
 

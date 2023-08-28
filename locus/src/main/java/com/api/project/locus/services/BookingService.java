@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
+import java.util.TimeZone;
 import java.util.UUID;
 
 import org.springframework.beans.BeanUtils;
@@ -57,12 +58,32 @@ public class BookingService {
 
 	public void convertoDtoToEntity(@Valid BookingDto bookingDto, BookingModel bookingModel) {
 		BeanUtils.copyProperties(bookingDto, bookingModel);
-		Optional<UserModel> userModel = userService.findById(bookingDto.getUsuarioId());
-		Optional<SpaceModel> spaceModel = spaceService.findById(bookingDto.getEspacoId());
-		Optional<ReviewModel> reviewModel = reviewService.findById(bookingDto.getAvaliacaoId());
+		setUsuario(bookingDto.getUsuarioId(),bookingModel);
+		setEspaco(bookingDto.getEspacoId(), bookingModel);
+		if (bookingDto.getAvaliacaoId() != null) {
+			setAvaliacao(bookingDto.getAvaliacaoId(),bookingModel);
+		}
+		bookingModel.setTimeZone(TimeZone.getTimeZone(bookingDto.getTimeZone()));
+	}
+
+	private void setUsuario(Long usuarioId, BookingModel bookingModel) {
+		Optional<UserModel> userModel = userService.findById(usuarioId);
 		bookingModel.setUsuario(userModel.get());
+	}
+
+	private void setEspaco(UUID espacoId, BookingModel bookingModel) {
+		Optional<SpaceModel> spaceModel = spaceService.findById(espacoId);
 		bookingModel.setEspaco(spaceModel.get());
+	}
+
+	private void setAvaliacao(UUID avaliacaoId, BookingModel bookingModel) {
+		Optional<ReviewModel> reviewModel = reviewService.findById(avaliacaoId);
 		bookingModel.setAvaliacao(reviewModel.orElse(null));
+	}
+
+	public boolean checkDates(BookingModel bookingModel) {
+		
+		return true;
 	}
 
 }

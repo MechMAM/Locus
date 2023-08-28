@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.api.project.locus.dtos.BookingDto;
+import com.api.project.locus.dtos.auth.ResponseMessage;
 import com.api.project.locus.models.BookingModel;
 import com.api.project.locus.services.BookingService;
 
@@ -39,7 +40,11 @@ public class BookingController {
 		var bookingModel = new BookingModel();
 		bookingService.convertoDtoToEntity(bookingDto, bookingModel);
 		bookingService.setDefaults(bookingModel);
-		return ResponseEntity.status(HttpStatus.CREATED).body(bookingService.save(bookingModel));
+		if (bookingService.checkDates(bookingModel)) {
+			return ResponseEntity.status(HttpStatus.CREATED).body(bookingService.save(bookingModel));
+		} else {
+			return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(new ResponseMessage("Já existe uma reserva para as datas solicitadas!"));
+		}
 	}
 	
 	@GetMapping

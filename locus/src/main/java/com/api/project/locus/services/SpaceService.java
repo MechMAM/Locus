@@ -1,5 +1,6 @@
 package com.api.project.locus.services;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.List;
@@ -71,6 +72,12 @@ public class SpaceService {
 		setAcessibilidades(spaceDto.getAcessibilidades(), spaceModel);
 		setPropositos(spaceDto.getPropositos(), spaceModel);
 		return spaceModel;				
+	}
+	
+	public double evaluatePrice(LocalDateTime dataInicio, LocalDateTime dataFim, double precoHorario, double taxaLimpeza) {
+		Duration duracao = Duration.between(dataInicio, dataFim);
+		double precoReserva = duracao.getSeconds()/3600*precoHorario+taxaLimpeza;
+		return precoReserva;
 	}
 	
 	private void setPropositos(Set<UUID> propositos, SpaceModel spaceModel) {

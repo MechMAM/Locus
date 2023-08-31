@@ -63,7 +63,14 @@ public class BookingService {
 		if (bookingDto.getAvaliacaoId() != null) {
 			setAvaliacao(bookingDto.getAvaliacaoId(),bookingModel);
 		}
+		setPreco(bookingModel);
 		bookingModel.setTimeZone(TimeZone.getTimeZone(bookingDto.getTimeZone()));
+	}
+
+	private void setPreco(BookingModel bookingModel) {
+		SpaceModel espaco = bookingModel.getEspaco();
+		double preco = spaceService.evaluatePrice(bookingModel.getDataInicio(), bookingModel.getDataFim(), espaco.getPrecoHorario(), espaco.getTaxaLimpeza());
+		bookingModel.setPreco(preco);		
 	}
 
 	private void setUsuario(Long usuarioId, BookingModel bookingModel) {
@@ -82,8 +89,12 @@ public class BookingService {
 	}
 
 	public boolean checkDates(BookingModel bookingModel) {
-		
-		return true;
+		List<BookingModel> reservas = bookingRepository.findByDataBetween(bookingModel.getDataInicio(), bookingModel.getDataFim(), bookingModel.getEspaco());
+		if (reservas.isEmpty()) {
+			return true;			
+		} else {
+			return false;
+		}
 	}
 
 }

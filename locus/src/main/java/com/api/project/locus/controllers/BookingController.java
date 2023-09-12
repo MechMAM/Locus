@@ -41,17 +41,18 @@ public class BookingController {
 		bookingService.convertoDtoToEntity(bookingDto, bookingModel);
 		bookingService.setDefaults(bookingModel);
 		if (bookingService.checkDates(bookingModel)) {
-			return ResponseEntity.status(HttpStatus.CREATED).body(bookingService.save(bookingModel));
-		} else {
+			return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(new ResponseMessage("Datas inválidas, tente novamente!"));
+		}
+		if (!bookingService.checkExistingBookings(bookingModel)) {
 			return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(new ResponseMessage("Já existe uma reserva para as datas solicitadas!"));
 		}
+		return ResponseEntity.status(HttpStatus.CREATED).body(bookingService.save(bookingModel));
 	}
 	
 	@GetMapping
 	public ResponseEntity<List<BookingModel>> getAllBookings(){
 		return ResponseEntity.status(HttpStatus.OK).body(bookingService.findAll());
 	}
-	
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Object> getOneBooking(@PathVariable(value = "id") UUID id){

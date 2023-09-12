@@ -89,12 +89,21 @@ public class BookingService {
 	}
 
 	public boolean checkDates(BookingModel bookingModel) {
+		if (bookingModel.getDataFim().isBefore(bookingModel.getDataInicio()) || bookingModel.getDataInicio().isBefore(LocalDateTime.now())) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
+	public boolean checkExistingBookings(BookingModel bookingModel) {
 		List<BookingModel> reservas = bookingRepository.findByDataBetween(bookingModel.getDataInicio(), bookingModel.getDataFim(), bookingModel.getEspaco());
 		if (reservas.isEmpty()) {
 			return true;			
 		} else {
 			return false;
 		}
+		
 	}
 
 }

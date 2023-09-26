@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,7 +39,7 @@ public class BookingController {
 		var bookingModel = new BookingModel();
 		bookingService.convertoDtoToEntity(bookingDto, bookingModel);
 		bookingService.setDefaults(bookingModel);
-		if (bookingService.checkDates(bookingModel)) {
+		if (bookingService.checkDates(bookingModel.getDataInicio(),bookingModel.getDataFim())) {
 			return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(new ResponseMessage("Datas inválidas, tente novamente!"));
 		}
 		if (!bookingService.checkExistingBookings(bookingModel)) {
@@ -58,19 +57,28 @@ public class BookingController {
 	public ResponseEntity<Object> getOneBooking(@PathVariable(value = "id") UUID id){
 		Optional<BookingModel> BookingModelOptional = bookingService.findById(id);
 		if (!BookingModelOptional.isPresent()) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Propósito não encontrado!");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Reserva não encontrada!");
 		}		
 		return ResponseEntity.status(HttpStatus.OK).body(BookingModelOptional.get());
+	}
+	
+	@GetMapping("/{id}/{dataInicio}/{dataFim}")
+	public ResponseEntity<Object> getBookingsByDate(@PathVariable(value = "id") UUID id, @PathVariable(value = "dataInicio") LocalDateTime dataInicio, @PathVariable(value = "dataFim") LocalDateTime dataFim){
+		if (bookingService.checkDates(dataInicio, dataFim)) {
+			return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(new ResponseMessage("Datas inválidas, tente novamente!"));
+		}
+		List<BookingModel> listaReservasEspaco = bookingService.findBySpaceAndDates(id, dataInicio, dataFim);
+		return ResponseEntity.status(HttpStatus.OK).body(listaReservasEspaco);
 	}
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Object> deleteBooking(@PathVariable(value = "id") UUID id){
 		Optional<BookingModel> bookingModelOptional = bookingService.findById(id);
 		if (!bookingModelOptional.isPresent()) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Propósito não encontrado!");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Reserva não encontrada!");
 		}
 		bookingService.delete(bookingModelOptional.get());
-		return ResponseEntity.status(HttpStatus.OK).body("Propósito deletado!");
+		return ResponseEntity.status(HttpStatus.OK).body("Reserva deletada!");
 	}
 	
 	@PutMapping("/{id}")
@@ -78,10 +86,16 @@ public class BookingController {
 											    @RequestBody @Valid BookingDto bookingDto){
 		Optional<BookingModel> bookingModelOptional = bookingService.findById(id);
 		if (!bookingModelOptional.isPresent()) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Propósito não encontrado!");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Reserva não encontrada!");
 		}
 		var bookingModel = new BookingModel();
-		BeanUtils.copyProperties(bookingDto, bookingModel);
+		bookingService.convertoDtoToEntity(bookingDto, bookingModel);
+		if (bookingService.checkDates(bookingModel.getDataInicio(),bookingModel.getDataFim())) {
+			return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(new ResponseMessage("Datas inválidas, tente novamente!"));
+		}
+		if (!bookingService.checkExistingBookings(bookingModel)) {
+			return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(new ResponseMessage("Já existe uma reserva para as datas solicitadas!"));
+		}
 		bookingModel.setId(bookingModelOptional.get().getId());
 		bookingModel.setDataModificacao(LocalDateTime.now(ZoneId.of("UTC")));
 		return ResponseEntity.status(HttpStatus.OK).body(bookingService.save(bookingModel));

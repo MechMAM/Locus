@@ -6,6 +6,8 @@ import java.util.Objects;
 import java.util.TimeZone;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -37,10 +39,12 @@ public class BookingModel implements Serializable{
 	@Column
 	private LocalDateTime dataModificacao;
 	
+	@JsonIgnoreProperties({"diferenciais","tiposDoEspaco","descricaoArredores","capacidade","area","dataInclusao","dataModificacao","status","disponibilidade","imagens","estacionamentos","servicos","acessibilidades","propositos"})
 	@ManyToOne(fetch = FetchType.EAGER, optional = false)
 	@JoinColumn(name = "fk_espaco_id", nullable = false)
 	private SpaceModel espaco;
 	
+	@JsonIgnoreProperties({"nome","cpf","telefone","dataNascimento","username","createdDate","status"})
 	@ManyToOne(fetch = FetchType.EAGER, optional = false)
 	@JoinColumn(name = "fk_usuario_id", nullable = false)
 	private UserModel usuario;

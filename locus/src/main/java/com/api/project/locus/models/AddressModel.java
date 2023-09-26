@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -45,9 +47,11 @@ public class AddressModel implements Serializable{
 	@Column(nullable = false, length = 10)
 	private String cep;
 	
+	@JsonIgnore
 	@Column
 	private LocalDateTime dataInclusao;
 	
+	@JsonIgnore
 	@Column
 	private LocalDateTime dataModificacao;
 	

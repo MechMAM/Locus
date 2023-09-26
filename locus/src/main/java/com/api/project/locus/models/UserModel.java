@@ -64,6 +64,7 @@ public class UserModel implements Serializable {
 	@JsonIgnore
 	private Set<CompanyModel> empresaId = new HashSet<>();
 
+	@JsonIgnore
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "usuario_has_acesso", 
 				joinColumns = @JoinColumn(name = "usuario_id"), 

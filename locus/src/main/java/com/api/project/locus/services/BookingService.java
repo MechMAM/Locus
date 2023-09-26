@@ -88,8 +88,8 @@ public class BookingService {
 		bookingModel.setAvaliacao(reviewModel.orElse(null));
 	}
 
-	public boolean checkDates(BookingModel bookingModel) {
-		if (bookingModel.getDataFim().isBefore(bookingModel.getDataInicio()) || bookingModel.getDataInicio().isBefore(LocalDateTime.now())) {
+	public boolean checkDates(LocalDateTime dataInicio, LocalDateTime dataFim) {
+		if (dataFim.isBefore(dataInicio) || dataInicio.isBefore(LocalDateTime.now())) {
 			return true;
 		}else {
 			return false;
@@ -104,6 +104,12 @@ public class BookingService {
 			return false;
 		}
 		
+	}
+	
+	public List<BookingModel> findBySpaceAndDates(UUID idEspaco, LocalDateTime dataInicio, LocalDateTime dataFim){
+		Optional<SpaceModel> spaceOptional = spaceService.findById(idEspaco);
+		List<BookingModel> reservas = bookingRepository.findByDataBetween(dataInicio, dataFim, spaceOptional.get());
+		return reservas;			
 	}
 
 }

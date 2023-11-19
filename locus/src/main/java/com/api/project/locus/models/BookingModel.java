@@ -6,6 +6,7 @@ import java.util.Objects;
 import java.util.TimeZone;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
@@ -34,8 +35,10 @@ public class BookingModel implements Serializable{
 	private TimeZone timeZone;
 	@Column
 	private double preco;
+	@JsonIgnore
 	@Column
 	private LocalDateTime dataInclusao;
+	@JsonIgnore
 	@Column
 	private LocalDateTime dataModificacao;
 	

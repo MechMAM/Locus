@@ -1,0 +1,58 @@
+[
+    {
+        "id": "12e15420-aa66-4a05-a12b-a0c327617604",
+        "nome": "Colações de grau",
+        "descricao": "Local para muitas pessoas e com recursos de audiovisuais",
+        "dataInclusao": "2023-11-18T18:42:10Z",
+        "dataModificacao": "2023-11-18T18:42:10Z",
+        "status": true
+    },
+    {
+        "id": "4395af86-adf2-4981-88c0-707f263084f5",
+        "nome": "Eventos empresariais",
+        "descricao": "Local adequado para apresentações empresariais",
+        "dataInclusao": "2023-11-18T18:42:27Z",
+        "dataModificacao": "2023-11-18T18:42:27Z",
+        "status": true
+    },
+    {
+        "id": "396d18a8-4fa2-4628-9933-e25baa2b2edb",
+        "nome": "Recitais",
+        "descricao": "Local com boa acústica e equipamentos para apresentações",
+        "dataInclusao": "2023-11-18T18:42:50Z",
+        "dataModificacao": "2023-11-18T18:42:50Z",
+        "status": true
+    },
+    {
+        "id": "b07a727e-048d-408e-b339-1246ae20304a",
+        "nome": "Convenções",
+        "descricao": "Local com boa área para mostra e circulação de pessoas",
+        "dataInclusao": "2023-11-18T18:43:12Z",
+        "dataModificacao": "2023-11-18T18:43:12Z",
+        "status": true
+    },
+    {
+        "id": "24416651-334d-44d3-a875-245d19a2e0a5",
+        "nome": "Peças Teatrais",
+        "descricao": "Local com equipamentos de palco e boa acústica para apresentações",
+        "dataInclusao": "2023-11-18T18:43:31Z",
+        "dataModificacao": "2023-11-18T18:43:31Z",
+        "status": true
+    },
+    {
+        "id": "4e127215-0d0f-48cc-81e7-31783d0a0129",
+        "nome": "Seminários",
+        "descricao": "Local com bons projetores e recursos audiovisuais",
+        "dataInclusao": "2023-11-18T18:43:47Z",
+        "dataModificacao": "2023-11-18T18:43:47Z",
+        "status": true
+    },
+    {
+        "id": "74346f81-3da1-470f-a2ac-44f38a5efa9a",
+        "nome": "Palestras",
+        "descricao": "Local semelhante a um auditório",
+        "dataInclusao": "2023-11-18T18:51:48Z",
+        "dataModificacao": "2023-11-18T18:51:48Z",
+        "status": true
+    }
+]

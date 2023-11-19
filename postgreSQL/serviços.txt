@@ -1,0 +1,50 @@
+[
+    {
+        "id": "e3e0cc93-818a-444f-8e08-6066cfbcc745",
+        "nome": "Recursos de vídeo",
+        "descricao": "Serviço de filmagem e transmissão em vídeo",
+        "dataInclusao": "2023-11-18T18:53:27Z",
+        "dataModificacao": "2023-11-18T18:53:27Z",
+        "status": true
+    },
+    {
+        "id": "cca48982-ad0f-4dad-8ba0-688833c25b03",
+        "nome": "Recursos de tradução simultânea",
+        "descricao": "Serviço de tradução para palestras em inglês e espanhol",
+        "dataInclusao": "2023-11-18T18:53:44Z",
+        "dataModificacao": "2023-11-18T18:53:44Z",
+        "status": true
+    },
+    {
+        "id": "f523c8b2-719d-4029-b5b3-b5f75b69fe02",
+        "nome": "Recursos de iluminação",
+        "descricao": "Equipamentos de iluminação de palco para apresentações",
+        "dataInclusao": "2023-11-18T18:54:04Z",
+        "dataModificacao": "2023-11-18T18:54:04Z",
+        "status": true
+    },
+    {
+        "id": "70f85cc8-8786-4122-9184-39238fac767a",
+        "nome": "Recursos de áudio",
+        "descricao": "Caixas de som, microfone, mesa de som.",
+        "dataInclusao": "2023-11-18T18:54:25Z",
+        "dataModificacao": "2023-11-18T18:54:25Z",
+        "status": true
+    },
+    {
+        "id": "a1a71037-98d9-41a1-b8ff-8f9ba3870383",
+        "nome": "Coffe Break",
+        "descricao": "Suprimento de doces e salgados de acordo com a capacidade do espaço.",
+        "dataInclusao": "2023-11-18T18:54:42Z",
+        "dataModificacao": "2023-11-18T18:54:42Z",
+        "status": true
+    },
+    {
+        "id": "b0b19d81-5321-4130-9956-6b6fe2dde534",
+        "nome": "Equipe de Palco",
+        "descricao": "Staff para montagem de equipamentos, ajuste da infraestrutura do local.",
+        "dataInclusao": "2023-11-18T18:55:00Z",
+        "dataModificacao": "2023-11-18T18:55:00Z",
+        "status": true
+    }
+]

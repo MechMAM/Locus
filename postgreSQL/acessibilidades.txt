@@ -1,0 +1,42 @@
+[
+    {
+        "id": "244ebbd3-1c4d-485e-99c0-0d94db3b4cf0",
+        "nome": "estacionamento_pcd",
+        "descricao": "Vagas de estacionamento para PCD",
+        "dataInclusao": "2023-11-18T18:40:05Z",
+        "dataModificacao": "2023-11-18T18:40:05Z",
+        "status": true
+    },
+    {
+        "id": "d7bd1ead-f9ed-4024-98af-f652442db2a4",
+        "nome": "banheiros",
+        "descricao": "Banheiros Acessíveis",
+        "dataInclusao": "2023-11-18T18:40:37Z",
+        "dataModificacao": "2023-11-18T18:40:37Z",
+        "status": true
+    },
+    {
+        "id": "6bc3ac3a-c152-4427-81d5-42f8a8f22afa",
+        "nome": "acesso_palco",
+        "descricao": "Acesso ao palco sem degraus",
+        "dataInclusao": "2023-11-18T18:40:54Z",
+        "dataModificacao": "2023-11-18T18:40:54Z",
+        "status": true
+    },
+    {
+        "id": "945e7971-a6f7-4c2a-8cb0-f1fb0f304e05",
+        "nome": "portas_largas",
+        "descricao": "Portas com mais de 81cm",
+        "dataInclusao": "2023-11-18T18:41:18Z",
+        "dataModificacao": "2023-11-18T18:41:18Z",
+        "status": true
+    },
+    {
+        "id": "623020c3-91c4-4b1e-86c7-50514a616333",
+        "nome": "entrada",
+        "descricao": "Entrada sem degraus",
+        "dataInclusao": "2023-11-18T18:41:34Z",
+        "dataModificacao": "2023-11-18T18:41:34Z",
+        "status": true
+    }
+]

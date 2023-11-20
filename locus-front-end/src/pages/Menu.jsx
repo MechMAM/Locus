@@ -43,7 +43,7 @@ function Menu() {
                   fontWeight="bold"
                   mb={3}
                 >
-                  Gerenciamento de reservas
+                  Listagem de reservas
                 </Typography>
               </Box>
             </CardContent>
@@ -87,7 +87,7 @@ function Menu() {
                   fontWeight="bold"
                   mb={3}
                 >
-                  Gerenciamento de espaços
+                  Visualizar espaços
                 </Typography>
               </Box>
             </CardContent>

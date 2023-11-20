@@ -5,12 +5,12 @@ import { AuthContext } from './AuthContext';
 
 export default function AuthProvider({ children }) {
   const [accessToken, setAccessToken] = useState('');
-  const [id, setId] = useState('');
+  const [userId, setUserId] = useState('');
   const [email, setEmail] = useState('');
   const [isLogged, setIsLogged] = useState(false);
   return (
     <AuthContext.Provider value={{
-      accessToken, setAccessToken, id, setId, email, setEmail, isLogged, setIsLogged,
+      accessToken, setAccessToken, userId, setUserId, email, setEmail, isLogged, setIsLogged,
     }}
     >
       {children}

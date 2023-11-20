@@ -8,7 +8,7 @@ import {
   CardContent,
   Container, Divider, Grid, TextField, Typography,
 } from '@mui/material';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from '../../config/axios';
 import { AuthContext } from '../../context/AuthContext';
 import Diferenciais from '../../components/Diferenciais';
@@ -17,7 +17,7 @@ import Acessibilidades from '../../components/Acessibilidades';
 
 export default function PaginaEspaco() {
   const { id } = useParams();
-  const { accessToken } = useContext(AuthContext);
+  const { accessToken, userId } = useContext(AuthContext);
 
   const [espaco, setEspaco] = useState('');
   const [dataInicio, setDataInicio] = useState('');
@@ -30,6 +30,8 @@ export default function PaginaEspaco() {
   const [acessibilidades, setAcessibilidades] = useState([]);
   const [diferenciais, setDiferenciais] = useState([]);
   const [propositos, setPropositos] = useState([]);
+
+  const navigate = useNavigate();
 
   const getDados = async () => {
     try {
@@ -57,10 +59,33 @@ export default function PaginaEspaco() {
         * Number(espaco.precoHorario)
         + Number(espaco.taxaLimpeza));
       setValorReserva(precoReserva.toFixed(2));
+    } else {
+      setValorReserva(0);
     }
     // console.log(Intl.DateTimeFormat().resolvedOptions().timeZone);
     // console.log(new Date(Date.parse(`${dataInicio}T${horaInicio}`)).toISOString());
   }, [dataInicio, dataFim, horaInicio, horaFim]);
+
+  const inserirReserva = async () => {
+    try {
+      if (valorReserva === 0) {
+        throw new Error('Preencha todos os campos corretamente');
+      }
+      const dataInicial = new Date(Date.parse(`${dataInicio}T${horaInicio}`)).toISOString();
+      const dataFinal = new Date(Date.parse(`${dataFim}T${horaFim}`)).toISOString();
+      const { timeZone } = Intl.DateTimeFormat().resolvedOptions();
+      await axios.post('/api/booking', {
+        dataInicio: dataInicial,
+        dataFim: dataFinal,
+        timeZone,
+        espacoId: id,
+        usuarioId: userId,
+      }, { headers: { Authorization: `Bearer ${accessToken}` } });
+      navigate('/reservas');
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <Container>
@@ -116,7 +141,7 @@ export default function PaginaEspaco() {
             Diferenciais:
           </Typography>
           {diferenciais.map((diferencial) => (
-            <Diferenciais id={diferencial.id} />
+            <Diferenciais id={diferencial.id} key={diferencial.id} />
           ))}
           <Box mt={1} mb={1}>
             <Divider />
@@ -125,16 +150,16 @@ export default function PaginaEspaco() {
             Finalidades do espaço:
           </Typography>
           {propositos.map((proposito) => (
-            <Propositos id={proposito.id} />
+            <Propositos id={proposito.id} key={proposito.id} />
           ))}
           <Box mt={1} mb={1}>
             <Divider />
           </Box>
           <Typography variant="h6" color="text.primary">
-            Diferenciais:
+            Acessibilidades:
           </Typography>
           {acessibilidades.map((acessibilidade) => (
-            <Acessibilidades id={acessibilidade.id} />
+            <Acessibilidades id={acessibilidade.id} key={acessibilidade.id} />
           ))}
         </Grid>
         <Grid item xs={12} md={6} lg={6}>
@@ -202,13 +227,13 @@ export default function PaginaEspaco() {
                 </Grid>
               </Grid>
               <Divider />
-              <Typography variant="body2" mt={1}>
-                {`Para este período o custo da reserva será de R$ ${valorReserva}`}
+              <Typography variant="body2" mt={2}>
+                {`Para este período o custo da reserva será de: ${valorReserva !== 0 ? (`R$ ${valorReserva}`) : ('')} `}
               </Typography>
             </CardContent>
             <Box display="flex" justifyContent="end" m={1}>
               <CardActions>
-                <Button variant="contained" color="success">Reservar</Button>
+                <Button variant="contained" color="success" onClick={inserirReserva}>Reservar</Button>
               </CardActions>
             </Box>
           </Card>

@@ -18,7 +18,7 @@ const defaultTheme = createTheme();
 
 export default function Login() {
   const {
-    setAccessToken, setIsLogged,
+    setAccessToken, setIsLogged, setUserId, setEmail,
   } = useContext(AuthContext);
   const [usuario, setUsuario] = useState('');
   const [senha, setSenha] = useState('');
@@ -34,6 +34,8 @@ export default function Login() {
       })
       .then((response) => {
         setAccessToken(response.data.accessToken);
+        setUserId(response.data.id);
+        setEmail(response.data.email);
         setIsLogged(true);
         setErro('');
         navigate('/menu');

@@ -14,10 +14,14 @@ import { AuthContext } from '../../context/AuthContext';
 import Diferenciais from '../../components/Diferenciais';
 import Propositos from '../../components/Propositos';
 import Acessibilidades from '../../components/Acessibilidades';
+import ModalErro from './ModalErro';
 
 export default function PaginaEspaco() {
   const { id } = useParams();
   const { accessToken, userId } = useContext(AuthContext);
+
+  const [open, setOpen] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
 
   const [espaco, setEspaco] = useState('');
   const [dataInicio, setDataInicio] = useState('');
@@ -42,13 +46,19 @@ export default function PaginaEspaco() {
       setDiferenciais(response.data.diferenciais);
       setPropositos(response.data.propositos);
     } catch (error) {
-      console.log(error);
+      if (error.response) {
+        setErrorMsg(error.response.data.message);
+      }
     }
   };
 
   useEffect(() => {
     getDados();
   }, []);
+
+  // useEffect(() => {
+  //   setErrorMsg('');
+  // }, [open]);
 
   useEffect(() => {
     if (dataInicio !== '' && dataFim !== '' && horaInicio !== '' && horaFim !== '') {
@@ -83,7 +93,12 @@ export default function PaginaEspaco() {
       }, { headers: { Authorization: `Bearer ${accessToken}` } });
       navigate('/reservas');
     } catch (error) {
-      console.log(error);
+      if (error.response) {
+        setErrorMsg(error.response.data.message);
+      } else {
+        setErrorMsg(error);
+      }
+      setOpen(true);
     }
   };
 
@@ -240,6 +255,7 @@ export default function PaginaEspaco() {
         </Grid>
 
       </Grid>
+      <ModalErro open={open} setOpen={setOpen} error={errorMsg} />
     </Container>
   );
 }

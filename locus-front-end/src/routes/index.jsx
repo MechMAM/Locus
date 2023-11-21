@@ -13,6 +13,10 @@ import ListaReservas from '../pages/Reservas/ListaReservas';
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
+      <Route
+        element={<LoginPage />}
+        index
+      />
       <Route element={<PrivateRoutes />}>
         <Route element={<Menu />} path="/menu" />
         <Route element={<ListaEspacos />} path="/espacos" />
@@ -24,10 +28,6 @@ const router = createBrowserRouter(
         <Route element={<ListaClientes />} path="/clientes" />
         <Route element={<ListaFuncionarios />} path="/funcionarios" /> */}
       </Route>
-      <Route
-        element={<LoginPage />}
-        path="/"
-      />
     </>,
   ),
 );

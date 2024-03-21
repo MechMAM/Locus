@@ -34,10 +34,9 @@ public class PurposeModel implements Serializable{
 		super();
 	}
 	
-	public PurposeModel(UUID id, String nome, String descricao, LocalDateTime dataInclusao, LocalDateTime dataModificacao,
+	public PurposeModel(String nome, String descricao, LocalDateTime dataInclusao, LocalDateTime dataModificacao,
 			boolean status) {
 		super();
-		this.id = id;
 		this.nome = nome;
 		this.descricao = descricao;
 		this.dataInclusao = dataInclusao;

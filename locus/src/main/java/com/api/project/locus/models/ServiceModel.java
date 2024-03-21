@@ -50,10 +50,9 @@ public class ServiceModel implements Serializable{
 		super();
 	}
 
-	public ServiceModel(UUID id, String nome, String descricao, LocalDateTime dataInclusao,
+	public ServiceModel(String nome, String descricao, LocalDateTime dataInclusao,
 			LocalDateTime dataModificacao, boolean status) {
 		super();
-		this.id = id;
 		this.nome = nome;
 		this.descricao = descricao;
 		this.dataInclusao = dataInclusao;

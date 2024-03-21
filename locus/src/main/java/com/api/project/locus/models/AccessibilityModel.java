@@ -49,10 +49,9 @@ public class AccessibilityModel implements Serializable{
 		super();
 	}
 
-	public AccessibilityModel(UUID id, String nome, String descricao, LocalDateTime dataInclusao,
+	public AccessibilityModel(String nome, String descricao, LocalDateTime dataInclusao,
 			LocalDateTime dataModificacao, boolean status) {
 		super();
-		this.id = id;
 		this.nome = nome;
 		this.descricao = descricao;
 		this.dataInclusao = dataInclusao;

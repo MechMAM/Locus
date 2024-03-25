@@ -1,6 +1,7 @@
 package com.api.project.locus.dtos;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -11,6 +12,8 @@ public class ChargingMethodDto {
 	private String tipoCobranca;
 	@NotNull
 	private LocalDateTime dataVencimento;
+	@NotNull
+	private UUID tituloId;
 	
 	public String getTipoCobranca() {
 		return tipoCobranca;
@@ -24,6 +27,13 @@ public class ChargingMethodDto {
 	public void setDataVencimento(LocalDateTime dataVencimento) {
 		this.dataVencimento = dataVencimento;
 	}
+	public UUID getTituloId() {
+		return tituloId;
+	}
+	public void setTituloId(UUID tituloId) {
+		this.tituloId = tituloId;
+	}
+	
 	
 	
 

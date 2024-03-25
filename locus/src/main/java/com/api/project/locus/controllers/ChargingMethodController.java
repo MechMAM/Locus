@@ -37,7 +37,7 @@ public class ChargingMethodController {
 	@PostMapping
 	public ResponseEntity<Object> saveChargingMethod(@RequestBody @Valid ChargingMethodDto chargingMethodDto){
 		var chargingMethodModel = new ChargingMethodModel();
-		BeanUtils.copyProperties(chargingMethodDto, chargingMethodModel);
+		chargingMethodService.convertDtoToEntity(chargingMethodDto, chargingMethodModel);
 		chargingMethodService.setDefaults(chargingMethodModel);
 		return ResponseEntity.status(HttpStatus.CREATED).body(chargingMethodService.save(chargingMethodModel));
 	}

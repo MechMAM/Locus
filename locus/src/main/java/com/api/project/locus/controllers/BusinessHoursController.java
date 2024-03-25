@@ -37,7 +37,7 @@ public class BusinessHoursController {
 	@PostMapping
 	public ResponseEntity<Object> saveBusinessHours(@RequestBody @Valid BusinessHoursDto businessHoursDto){
 		var businessHoursModel = new BusinessHoursModel();
-		BeanUtils.copyProperties(businessHoursDto, businessHoursModel);
+		businessHoursService.convertDtoToEntity(businessHoursDto,businessHoursModel);
 		businessHoursService.setDefaults(businessHoursModel);
 		return ResponseEntity.status(HttpStatus.CREATED).body(businessHoursService.save(businessHoursModel));
 	}

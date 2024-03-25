@@ -5,11 +5,16 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -29,6 +34,11 @@ public class ImageModel implements Serializable{
 	
 	@Column
 	private LocalDateTime dataInclusao;
+	
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "fk_espaco_id", nullable = false)
+	@JsonIgnore
+	private SpaceModel espaco;
 
 	public ImageModel() {
 		super();
@@ -76,6 +86,14 @@ public class ImageModel implements Serializable{
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public SpaceModel getEspaco() {
+		return espaco;
+	}
+
+	public void setEspaco(SpaceModel espaco) {
+		this.espaco = espaco;
 	}
 
 	@Override

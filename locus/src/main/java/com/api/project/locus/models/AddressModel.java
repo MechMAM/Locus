@@ -50,7 +50,7 @@ public class AddressModel implements Serializable{
 	
 	@Column
 	private LocalDateTime dataModificacao;
-
+	
 	public AddressModel() {
 		super();
 	}
@@ -182,10 +182,11 @@ public class AddressModel implements Serializable{
 
 	@Override
 	public String toString() {
-		return "AdressModel [id=" + id + ", bairro=" + bairro + ", logradouro=" + logradouro + ", numero=" + numero
+		return "AddressModel [id=" + id + ", bairro=" + bairro + ", logradouro=" + logradouro + ", numero=" + numero
 				+ ", complemento=" + complemento + ", cidade=" + cidade + ", estado=" + estado + ", pais=" + pais
 				+ ", cep=" + cep + ", dataInclusao=" + dataInclusao + ", dataModificacao=" + dataModificacao + "]";
 	}
+
 	
 	
 }

@@ -18,24 +18,24 @@ import jakarta.transaction.Transactional;
 public class PurposeService {
 	
 	@Autowired
-	PurposeRepository propositoRepository;
+	PurposeRepository purposeRepository;
 	
 	@Transactional
-	public PurposeModel save(PurposeModel propositoModel) {
-		return propositoRepository.save(propositoModel);
+	public PurposeModel save(PurposeModel purposeModel) {
+		return purposeRepository.save(purposeModel);
 	}
 	
 	public List<PurposeModel> findAll() {		
-		return propositoRepository.findAll();
+		return purposeRepository.findAll();
 	}
 	
 	public Optional<PurposeModel> findById(UUID id) {
-		return propositoRepository.findById(id);
+		return purposeRepository.findById(id);
 	}
 
 	@Transactional
-	public void delete(PurposeModel propositoModel) {
-		propositoRepository.delete(propositoModel);;		
+	public void delete(PurposeModel purposeModel) {
+		purposeRepository.delete(purposeModel);;		
 	}
 
 	public void setDefaults(PurposeModel purposeModel) {

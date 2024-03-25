@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +33,7 @@ public class ImageController {
 	@PostMapping
 	public ResponseEntity<Object> saveImage(@RequestBody @Valid ImageDto imageDto){
 		var imageModel = new ImageModel();
-		BeanUtils.copyProperties(imageDto, imageModel);
+		imageService.convertDtoToEntity(imageDto, imageModel);
 		imageService.setDefaults(imageModel);
 		return ResponseEntity.status(HttpStatus.CREATED).body(imageService.save(imageModel));
 	}

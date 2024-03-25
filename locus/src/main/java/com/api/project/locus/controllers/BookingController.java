@@ -37,7 +37,7 @@ public class BookingController {
 	@PostMapping
 	public ResponseEntity<Object> saveBooking(@RequestBody @Valid BookingDto bookingDto){
 		var bookingModel = new BookingModel();
-		BeanUtils.copyProperties(bookingDto, bookingModel);
+		bookingService.convertoDtoToEntity(bookingDto, bookingModel);
 		bookingService.setDefaults(bookingModel);
 		return ResponseEntity.status(HttpStatus.CREATED).body(bookingService.save(bookingModel));
 	}

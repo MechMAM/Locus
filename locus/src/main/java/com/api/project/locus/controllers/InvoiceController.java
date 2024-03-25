@@ -37,7 +37,7 @@ public class InvoiceController {
 	@PostMapping
 	public ResponseEntity<Object> saveInvoice(@RequestBody @Valid InvoiceDto invoiceDto){
 		var invoiceModel = new InvoiceModel();
-		BeanUtils.copyProperties(invoiceDto, invoiceModel);
+		invoiceService.convertDtoToEntity(invoiceDto, invoiceModel);
 		invoiceService.setDefaults(invoiceModel);
 		return ResponseEntity.status(HttpStatus.CREATED).body(invoiceService.save(invoiceModel));
 	}

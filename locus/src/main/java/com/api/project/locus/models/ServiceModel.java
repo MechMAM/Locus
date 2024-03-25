@@ -2,14 +2,20 @@ package com.api.project.locus.models;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -32,6 +38,10 @@ public class ServiceModel implements Serializable{
 	
 	@Column
 	private LocalDateTime dataModificacao;
+	
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "servico")
+	private Set<SpaceHasServiceModel> espacos = new HashSet<>();
 	
 	@Column
 	private boolean status;
@@ -101,6 +111,14 @@ public class ServiceModel implements Serializable{
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public Set<SpaceHasServiceModel> getEspacos() {
+		return espacos;
+	}
+
+	public void setEspacos(Set<SpaceHasServiceModel> espacos) {
+		this.espacos = espacos;
 	}
 
 	@Override

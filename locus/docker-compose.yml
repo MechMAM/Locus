@@ -14,6 +14,9 @@ services:
       - '8080:8080'
     depends_on:
       - locus_db
+    networks:
+      - backend
+
   locus_db:
     container_name: locus_db
     image: postgres:latest
@@ -23,7 +26,12 @@ services:
       POSTGRES_USER: "postgres"
       POSTGRES_PASSWORD: "miguel"
     ports:
-      - '5433:5432'
+      - '5433:5432'      
+    networks:
+      - backend
 
 volumes:
   pgdata:
+
+networks:
+  backend:

@@ -31,3 +31,39 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
+
+# dependencies
+locus_app/node_modules/
+
+# Expo
+locus_app/.expo/
+locus_app/dist/
+locus_app/web-build/
+
+# Native
+locus_app/*.orig.*
+locus_app/*.jks
+locus_app/*.p8
+locus_app/*.p12
+locus_app/*.key
+locus_app/*.mobileprovision
+
+# Metro
+locus_app/.metro-health-check*
+
+# debug
+locus_app/npm-debug.*
+locus_app/yarn-debug.*
+locus_app/yarn-error.*
+
+# macOS
+locus_app/.DS_Store
+locus_app/*.pem
+
+# local env files
+locus_app/.env*.local
+
+# typescript
+locus_app/*.tsbuildinfo

@@ -1,0 +1,26 @@
+[
+    {
+        "id": "81bb0c41-8d4b-414d-927b-674a3aaba1b9",
+        "nome": "Banheiro Família",
+        "descricao": "Banheiro adequado para família com crianças",
+        "dataInclusao": "2023-11-18T18:52:32Z",
+        "dataModificacao": "2023-11-18T18:52:32Z",
+        "status": true
+    },
+    {
+        "id": "34de170f-b7af-4667-be69-946a1728e20f",
+        "nome": "Espaço Kids",
+        "descricao": "Espaço com brinquedos para crianças",
+        "dataInclusao": "2023-11-18T18:52:42Z",
+        "dataModificacao": "2023-11-18T18:52:42Z",
+        "status": true
+    },
+    {
+        "id": "c9b26ca0-ff3e-43a2-b682-d1e82314d11b",
+        "nome": "Fraldário",
+        "descricao": "Espaço para troca e higienização de bebês",
+        "dataInclusao": "2023-11-18T18:53:06Z",
+        "dataModificacao": "2023-11-18T18:53:06Z",
+        "status": true
+    }
+]

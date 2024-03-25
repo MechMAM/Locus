@@ -21,6 +21,7 @@ public class SpaceDto {
 	@NotNull
 	private double area;
 	private LocalTime tempoLimpeza;
+	@NotNull
 	private double taxaLimpeza;
 	@NotNull
 	private boolean hasTaxaLimpeza;

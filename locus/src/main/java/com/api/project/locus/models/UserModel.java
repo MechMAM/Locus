@@ -47,7 +47,8 @@ public class UserModel implements Serializable {
 	
 	@Column(nullable = false, unique = true, length = 50)
 	private String username;
-
+	
+	@JsonIgnore
 	@Column(nullable = false, length = 255)
 	private String senha;
 
@@ -63,6 +64,7 @@ public class UserModel implements Serializable {
 	@JsonIgnore
 	private Set<CompanyModel> empresaId = new HashSet<>();
 
+	@JsonIgnore
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "usuario_has_acesso", 
 				joinColumns = @JoinColumn(name = "usuario_id"), 

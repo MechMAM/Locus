@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
+import java.util.TimeZone;
 import java.util.UUID;
 
 import org.springframework.beans.BeanUtils;
@@ -57,12 +58,58 @@ public class BookingService {
 
 	public void convertoDtoToEntity(@Valid BookingDto bookingDto, BookingModel bookingModel) {
 		BeanUtils.copyProperties(bookingDto, bookingModel);
-		Optional<UserModel> userModel = userService.findById(bookingDto.getUsuarioId());
-		Optional<SpaceModel> spaceModel = spaceService.findById(bookingDto.getEspacoId());
-		Optional<ReviewModel> reviewModel = reviewService.findById(bookingDto.getAvaliacaoId());
+		setUsuario(bookingDto.getUsuarioId(),bookingModel);
+		setEspaco(bookingDto.getEspacoId(), bookingModel);
+		if (bookingDto.getAvaliacaoId() != null) {
+			setAvaliacao(bookingDto.getAvaliacaoId(),bookingModel);
+		}
+		setPreco(bookingModel);
+		bookingModel.setTimeZone(TimeZone.getTimeZone(bookingDto.getTimeZone()));
+	}
+
+	private void setPreco(BookingModel bookingModel) {
+		SpaceModel espaco = bookingModel.getEspaco();
+		double preco = spaceService.evaluatePrice(bookingModel.getDataInicio(), bookingModel.getDataFim(), espaco.getPrecoHorario(), espaco.getTaxaLimpeza());
+		bookingModel.setPreco(preco);		
+	}
+
+	private void setUsuario(Long usuarioId, BookingModel bookingModel) {
+		Optional<UserModel> userModel = userService.findById(usuarioId);
 		bookingModel.setUsuario(userModel.get());
+	}
+
+	private void setEspaco(UUID espacoId, BookingModel bookingModel) {
+		Optional<SpaceModel> spaceModel = spaceService.findById(espacoId);
 		bookingModel.setEspaco(spaceModel.get());
+	}
+
+	private void setAvaliacao(UUID avaliacaoId, BookingModel bookingModel) {
+		Optional<ReviewModel> reviewModel = reviewService.findById(avaliacaoId);
 		bookingModel.setAvaliacao(reviewModel.orElse(null));
+	}
+
+	public boolean checkDates(LocalDateTime dataInicio, LocalDateTime dataFim) {
+		if (dataFim.isBefore(dataInicio) || dataInicio.isBefore(LocalDateTime.now())) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
+	public boolean checkExistingBookings(BookingModel bookingModel) {
+		List<BookingModel> reservas = bookingRepository.findByDataBetween(bookingModel.getDataInicio(), bookingModel.getDataFim(), bookingModel.getEspaco());
+		if (reservas.isEmpty()) {
+			return true;			
+		} else {
+			return false;
+		}
+		
+	}
+	
+	public List<BookingModel> findBySpaceAndDates(UUID idEspaco, LocalDateTime dataInicio, LocalDateTime dataFim){
+		Optional<SpaceModel> spaceOptional = spaceService.findById(idEspaco);
+		List<BookingModel> reservas = bookingRepository.findByDataBetween(dataInicio, dataFim, spaceOptional.get());
+		return reservas;			
 	}
 
 }

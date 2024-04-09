@@ -19,16 +19,13 @@ export const Login = () => {
   const [openDialog, setOpenDialog] = useState(false)
   const [dialogTitle, setDialogTitle] = useState('')
   const [dialogDescription, setDialogDescription] = useState('')
+  // const navigate = useNavigate();
 
 
-  useEffect(() => {
-    // return firebaseauth.onAuthStateChanged(onAuthStateChanged) // faz o unsibcribe dos metodos quando desmonta o componente
-    setIsRegistering(false)
-  }, [])
   // useEffect(() => {
-    // return firebaseauth.onAuthStateChanged(onAuthStateChanged) // faz o unsibcribe dos metodos quando desmonta o componente
-    // setIsRegistering(false)
-  // }, [accessToken])
+  //   // return firebaseauth.onAuthStateChanged(onAuthStateChanged) // faz o unsibcribe dos metodos quando desmonta o componente
+  //   setIsRegistering(false)
+  // }, [])
 
   /*
   // Verifica o estado da autenticação do usuário
@@ -40,33 +37,43 @@ export const Login = () => {
       // Navigation.navigate('Home')
     }
 
-    setShowLoading(false)
+    setShowLoading(false) hiruzen 123456
   }
   */
 
   const handleLogin = async () => {
-
     try {
       const response = await api
-      .post('/api/auth/signin',{
-        username: user,
-        password: password,
-      })
-    setAccessToken(response.data.accessToken);
-    setEmail(response.data.email);
+        .post('/api/auth/signin',
+        {
+          username: user,
+          password,
+        })
+      setAccessToken(response.data.accessToken);
+        // .then((response) => {
+        //   setAccessToken(response.data.accessToken);
+        // })
+        // .catch((e) => console.error(e))
     } catch (error) {
       console.log(error);
-      
     }
     // api
+    // .post('/api/auth/signin',{
+    //   username: user,
+    //   password,
+    // })
     // .then((response) => {
-      // setUserId(response.data.id);
-      // setIsLogged(true);
-      // setErro('');
-      // navigate('/menu');
+    //   setAccessToken(response.data.accessToken);
+    //   console.log(response.data.accessToken);
+    //   // setUserId(response.data.id);
+    //   setEmail(response.data.email);
+    //   // setIsLogged(true);
+    //   // setErro('');
+    //   // navigate('/menu');
     // })
     // .catch((error) => {
-      // setErro(error.response.data.message);
+    //   console.log(error.error);
+    //   // setErro(error.response.data.message);
     // });
   }
 
@@ -95,13 +102,17 @@ export const Login = () => {
             onPress={async () => {
             console.log('Fazendo acesso');
             await handleLogin();
-            console.log(accessToken);
+            console.log(user,password,accessToken);
             // navigation.navigate('Home')
           }}>Acessar</Button>
           
           <Button 
             style={{ marginTop: 16 }}
-            onPress={() => setIsRegistering(true)}>Criar Conta</Button>
+            onPress={() => setIsRegistering(true)}
+          >
+            'Criar Conta'
+          </Button>
+
 
         <TextInput
           style={{ marginTop: 16 }}

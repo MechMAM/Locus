@@ -1,17 +1,20 @@
 import React, {useEffect, useState} from 'react'
 import { Dimensions, StyleSheet, View } from 'react-native'
 import { Button, Card, Text, TextInput } from 'react-native-paper'
+import api from '../../config/axios'
 
 export const Login = () => {
 
   const [showLoading, setShowLoading] = useState(false)
   const [displayName, setDisplayName] = useState('')
   const [email, setEmail] = useState('')
+  const [user, setUser] = useState('')
   const [password, setPassword] = useState<string>('')
   const [isPasswordVisible, setIsPasswordVisible] = useState(false)
   const [confirmPassword, setConfirmPassword] = useState('')
   const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] = useState(false)
   const [isRegistering, setIsRegistering] = useState(false)
+  const [accessToken, setAccessToken] = useState('')
 
   const [openDialog, setOpenDialog] = useState(false)
   const [dialogTitle, setDialogTitle] = useState('')
@@ -22,6 +25,10 @@ export const Login = () => {
     // return firebaseauth.onAuthStateChanged(onAuthStateChanged) // faz o unsibcribe dos metodos quando desmonta o componente
     setIsRegistering(false)
   }, [])
+  // useEffect(() => {
+    // return firebaseauth.onAuthStateChanged(onAuthStateChanged) // faz o unsibcribe dos metodos quando desmonta o componente
+    // setIsRegistering(false)
+  // }, [accessToken])
 
   /*
   // Verifica o estado da autenticação do usuário
@@ -37,15 +44,41 @@ export const Login = () => {
   }
   */
 
+  const handleLogin = async () => {
+
+    try {
+      const response = await api
+      .post('/api/auth/signin',{
+        username: user,
+        password: password,
+      })
+    setAccessToken(response.data.accessToken);
+    setEmail(response.data.email);
+    } catch (error) {
+      console.log(error);
+      
+    }
+    // api
+    // .then((response) => {
+      // setUserId(response.data.id);
+      // setIsLogged(true);
+      // setErro('');
+      // navigate('/menu');
+    // })
+    // .catch((error) => {
+      // setErro(error.response.data.message);
+    // });
+  }
+
   const LoginScreen = () => {
     return (
       <View style={{margin: 16}}>
         <TextInput
           style={{ marginTop: 16 }}
-          label={'nome'}
-          value={displayName}
-          onChangeText={setDisplayName}
-          placeholder='Nome de usuário' />
+          label={'Usuário'}
+          value={user}
+          onChangeText={setUser}
+          placeholder='Insira seu usuário' />
 
 
         <TextInput
@@ -59,14 +92,22 @@ export const Login = () => {
           <Button 
             style={{ marginTop: 16 }}
             mode='contained'
-            onPress={() => {
-            console.log('Fazendo acesso')
+            onPress={async () => {
+            console.log('Fazendo acesso');
+            await handleLogin();
+            console.log(accessToken);
             // navigation.navigate('Home')
           }}>Acessar</Button>
           
           <Button 
             style={{ marginTop: 16 }}
             onPress={() => setIsRegistering(true)}>Criar Conta</Button>
+
+        <TextInput
+          style={{ marginTop: 16 }}
+          label={'Token'}
+          value={accessToken}
+          placeholder='Este é o token' />
       </View>
     )
   }
@@ -76,17 +117,17 @@ export const Login = () => {
       <View style={{margin: 16}}>
         <TextInput
           style={{ marginTop: 16 }}
-          label={'nome'}
-          value={displayName}
-          onChangeText={setDisplayName}
-          placeholder='Nome de usuário' />
+          label={'Usuário'}
+          value={user}
+          onChangeText={setUser}
+          placeholder='Usuário' />
 
         <TextInput
           style={{ marginTop: 16 }}
           label={'Email'}
           value={email}
           onChangeText={setEmail}
-          placeholder='email@dominio.com' />
+          placeholder='Insira seu Email' />
 
         <TextInput
           style={{ marginTop: 16 }}

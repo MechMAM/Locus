@@ -1,7 +1,8 @@
 import { View } from "react-native";
 import { Card, Text } from "react-native-paper";
+import { NavigationContainer } from "@react-navigation/native";
 
-export const Home = () => {
+export function Home() {
   return (
     <View>
       <Card>

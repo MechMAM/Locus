@@ -2,25 +2,24 @@ import React, {useEffect, useState} from 'react'
 import { Dimensions, StyleSheet, View } from 'react-native'
 import { Button, Card, Text, TextInput } from 'react-native-paper'
 import api from '../../config/axios'
+import { NativeStackScreenProps } from '@react-navigation/native-stack'
+import { RootStack } from '../../../App'
 
-export const Login = () => {
+type LoginScreenProps = NativeStackScreenProps<RootStack, "Login">;
+
+export const Login = (props : LoginScreenProps) => {
 
   const [showLoading, setShowLoading] = useState(false)
   const [displayName, setDisplayName] = useState('')
-  const [email, setEmail] = useState('')
   const [user, setUser] = useState('')
   const [password, setPassword] = useState<string>('')
   const [isPasswordVisible, setIsPasswordVisible] = useState(false)
-  const [confirmPassword, setConfirmPassword] = useState('')
-  const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] = useState(false)
   const [isRegistering, setIsRegistering] = useState(false)
   const [accessToken, setAccessToken] = useState('')
 
   const [openDialog, setOpenDialog] = useState(false)
   const [dialogTitle, setDialogTitle] = useState('')
   const [dialogDescription, setDialogDescription] = useState('')
-  // const navigate = useNavigate();
-
 
   // useEffect(() => {
   //   // return firebaseauth.onAuthStateChanged(onAuthStateChanged) // faz o unsibcribe dos metodos quando desmonta o componente
@@ -77,7 +76,6 @@ export const Login = () => {
     // });
   }
 
-  const LoginScreen = () => {
     return (
       <View style={{margin: 16}}>
         <TextInput
@@ -102,17 +100,16 @@ export const Login = () => {
             onPress={async () => {
             console.log('Fazendo acesso');
             await handleLogin();
-            console.log(user,password,accessToken);
+            console.log(`Usuário: ${user}, senha: ${password} e token de acesso ${accessToken}`);
             // navigation.navigate('Home')
           }}>Acessar</Button>
           
           <Button 
             style={{ marginTop: 16 }}
-            onPress={() => setIsRegistering(true)}
+            onPress={() => props.navigation.push('Register')}
           >
             'Criar Conta'
           </Button>
-
 
         <TextInput
           style={{ marginTop: 16 }}
@@ -122,68 +119,3 @@ export const Login = () => {
       </View>
     )
   }
-
-  const RegisterAccountScreen = () => {
-    return (
-      <View style={{margin: 16}}>
-        <TextInput
-          style={{ marginTop: 16 }}
-          label={'Usuário'}
-          value={user}
-          onChangeText={setUser}
-          placeholder='Usuário' />
-
-        <TextInput
-          style={{ marginTop: 16 }}
-          label={'Email'}
-          value={email}
-          onChangeText={setEmail}
-          placeholder='Insira seu Email' />
-
-        <TextInput
-          style={{ marginTop: 16 }}
-          label={'Senha'}
-          value={password}
-          secureTextEntry={!isPasswordVisible}
-          onChangeText={setPassword}
-          placeholder='******' />
-
-        <TextInput
-          style={{ marginTop: 16 }}
-          label={'Confirme a Senha'}
-          value={confirmPassword}
-          secureTextEntry={!isConfirmPasswordVisible}
-          onChangeText={setConfirmPassword}
-          placeholder='******' />
-
-        <Button 
-          style={{ marginTop: 16 }}
-          mode='contained'
-          onPress={() => {
-          console.log('Criando conta e fazendo acesso')
-          // navigation.navigate('Home')
-        }}>Criar conta e Acessar</Button>
-
-        <Button 
-          style={{ marginTop: 16 }}
-          onPress={() => setIsRegistering(false)}>Cancelar</Button>
-      </View>
-    )
-  }
-
-  return (
-      <View style={{
-        flexGrow: 1,
-        padding: 16,
-        width: Dimensions.get('window').width
-      }}>
-          <Card>
-              {
-                !isRegistering
-                  ? <LoginScreen />
-                  : <RegisterAccountScreen />
-              }
-          </Card>
-      </View>
-  )
-}

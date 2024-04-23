@@ -1,4 +1,4 @@
-import { useReducer, useEffect, useMemo, createContext } from 'react';
+import { useReducer, useEffect, useMemo, createContext, Dispatch } from 'react';
 import * as SecureStore from 'expo-secure-store';
 
 import { PaperProvider } from 'react-native-paper';
@@ -14,13 +14,17 @@ import { red100 } from 'react-native-paper/lib/typescript/styles/themes/v2/color
 import { Login } from './src/pages/login';
 import { Register } from './src/pages/register';
 import { Endereco } from './src/pages/endereco';
+import { RegistroUsuario } from './src/pages/cadastro_usuario';
+import { Espaco } from './src/pages/espaco';
 import { Home } from './src/pages/home';
 
 import api from './src/config/axios';
+import { State } from 'react-native-paper/lib/typescript/components/TextInput/types';
 // import { state, dispatch } from './src/config/Authentication';
 // import { authContext, AuthContext } from './src/config/Authentication';
 
-export const AuthContext = createContext();
+export const AuthContext = createContext({});
+
 
 export type RootStack = {
   Login: undefined;
@@ -33,7 +37,7 @@ export type RootStack = {
   Servico: undefined;
   Proposito: undefined;
   Espaco: undefined;
-  CadastroUsuario: undefined;
+  RegistroUsuario: undefined;
   Home: undefined;
 }
 
@@ -42,7 +46,7 @@ const Stack = createNativeStackNavigator<RootStack>();
 export default function App() {
 
   const [state, dispatch] = useReducer(
-    (prevState, action) => {
+    (prevState: State, action) => {
       switch (action.type) {
         case 'RESTORE_TOKEN':
           return {
@@ -157,6 +161,16 @@ export default function App() {
                   name='Endereco'
                   component={Endereco}
                   options={{ title: 'Cadastro de Endereço' }}
+                />
+                <Stack.Screen
+                  name='RegistroUsuario'
+                  component={RegistroUsuario}
+                  options={{ title: 'Cadastro de Usuário' }}
+                />
+                <Stack.Screen
+                  name='Espaco'
+                  component={Espaco}
+                  options={{ title: 'Cadastro de Espaço' }}
                 />
               </>
             )}

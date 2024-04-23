@@ -38,7 +38,6 @@ build/
 locus_app/node_modules/
 
 # Expo
-locus_app/.expo/
 locus_app/dist/
 locus_app/web-build/
 

@@ -1,27 +1,48 @@
 import { View } from "react-native"
 import { TextInput, Button } from "react-native-paper"
 import { useState } from "react"
+import * as SecureStore from 'expo-secure-store';
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStack } from "../../../App";
+
+import axios from "../../config/axios";
 
 type CadastroUsuarioScreenProps = NativeStackScreenProps<RootStack, "CadastroUsuario">;
 
 export function RegistroUsuario(props: CadastroUsuarioScreenProps) {
-  const [usuario, setUsuario] = useState('')
+  const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
+  const [role, setRole] = useState('')
   const [password, setPassword] = useState<string>('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [isPasswordVisible, setIsPasswordVisible] = useState(false)
   const [isConfirmPasswordVisible, set] = useState(false)
   const [isRegistering, setIsRegistering] = useState(false)
 
+  const handleSubmit = async () => {
+    const accessToken = await SecureStore.getItemAsync('userToken');
+    try {
+      await axios.post('/api/auth/signup', {
+        username,
+        email,
+        role,
+        password
+      }, {
+        headers: { Authorization: `Bearer ${accessToken}` }
+      });
+      props.navigation.push('Home');
+    } catch (error) {
+      setErro(error.response.data.message);
+    }
+  }
+
   return (
     <View style={{ margin: 16 }}>
       <TextInput
         style={{ marginTop: 16 }}
         label={'Usuário'}
-        value={usuario}
-        onChangeText={setUsuario}
+        value={username}
+        onChangeText={setUsername}
         placeholder='Informe o nome do usuário' />
 
       <TextInput
@@ -30,6 +51,13 @@ export function RegistroUsuario(props: CadastroUsuarioScreenProps) {
         value={email}
         onChangeText={setEmail}
         placeholder='Informe o e-mail do usuário' />
+
+      <TextInput
+        style={{ marginTop: 16 }}
+        label={'Papel'}
+        value={role}
+        onChangeText={setRole}
+        placeholder='Informe o papel do usuário' />
 
       <TextInput
         style={{ marginTop: 16 }}

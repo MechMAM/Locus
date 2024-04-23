@@ -22,7 +22,7 @@ export const Login = (props : LoginScreenProps) => {
   const [dialogTitle, setDialogTitle] = useState('')
   const [dialogDescription, setDialogDescription] = useState('')
 
-  const { signIn }= useContext(AuthContext);
+  const { signIn } = useContext(AuthContext);
 
     return (
       <View style={{margin: 16}}>
@@ -51,7 +51,7 @@ export const Login = (props : LoginScreenProps) => {
 
           <Button
             style={{ marginTop: 16 }}
-            onPress={() => {props.navigation.push('RegistroUsuario')}}
+            onPress={() => {props.navigation.push('Register')}}
           >
             'Criar Conta'
           </Button>

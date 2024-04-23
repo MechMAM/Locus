@@ -22,6 +22,36 @@ export function Home(props: HomeScreenProps) {
         >
           Cadastrar endereço
         </Button>
+        <Button
+          style={{ marginTop: 16 }}
+          icon="account-plus-outline"
+          // buttonColor={MD3Colors.primary30}
+          mode="contained"
+          onPress={() => { props.navigation.push('RegistroUsuario') }}
+          contentStyle={{ flexDirection: "row-reverse" }}
+        >
+          Cadastrar usuário
+        </Button>
+        <Button
+          style={{ marginTop: 16 }}
+          icon="domain-plus"
+          // buttonColor={MD3Colors.primary30}
+          mode="contained"
+          onPress={() => { props.navigation.push('Espaco') }}
+          contentStyle={{ flexDirection: "row-reverse" }}
+        >
+          Cadastrar espaço
+        </Button>
+        <Button
+          style={{ marginTop: 16 }}
+          icon="home-group-plus"
+          // buttonColor={MD3Colors.primary30}
+          mode="contained"
+          onPress={() => { props.navigation.push('Endereco') }}
+          contentStyle={{ flexDirection: "row-reverse" }}
+        >
+          Cadastrar empresa
+        </Button>
       </Card>
     </View>
   )

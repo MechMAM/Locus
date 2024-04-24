@@ -44,9 +44,8 @@ export type RootStack = {
 const Stack = createNativeStackNavigator<RootStack>();
 
 export default function App() {
-
   const [state, dispatch] = useReducer(
-    (prevState: State, action) => {
+    (prevState, action) => {
       switch (action.type) {
         case 'RESTORE_TOKEN':
           return {
@@ -101,23 +100,26 @@ export default function App() {
       signIn: async (username, password) => {
         let accessToken = '';
         try {
+          console.log(username, password);
           const response = await api
             .post('/api/auth/signin',
               {
                 username,
                 password,
               })
+          console.log(response, username, password);
           accessToken = response.data.accessToken;
+          console.log({ accessToken });
           await SecureStore.setItemAsync('userToken', accessToken);
+          dispatch({ type: 'SIGN_IN', token: accessToken });
         } catch (error) {
-          console.log(error);
+          console.log({ error });
         }
         // In a production app, we need to send some data (usually username, password) to server and get a token
         // We will also need to handle errors if sign in failed
         // After getting token, we need to persist the token using `SecureStore`
         // In the example, we'll use a dummy token
 
-        dispatch({ type: 'SIGN_IN', token: accessToken });
       },
       signOut: () => dispatch({ type: 'SIGN_OUT' }),
       signUp: async (data) => {
@@ -137,7 +139,7 @@ export default function App() {
       <AuthContext.Provider value={authContext}>
         <NavigationContainer>
           <Stack.Navigator>
-            {state.userToken == null ? (
+            {state.userToken === null ? (
               <>
                 <Stack.Screen
                   name='Login'

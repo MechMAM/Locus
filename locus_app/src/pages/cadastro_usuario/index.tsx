@@ -7,9 +7,9 @@ import { RootStack } from "../../../App";
 
 import axios from "../../config/axios";
 
-type CadastroUsuarioScreenProps = NativeStackScreenProps<RootStack, "CadastroUsuario">;
+type RegistroUsuarioScreenProps = NativeStackScreenProps<RootStack, "RegistroUsuario">;
 
-export function RegistroUsuario(props: CadastroUsuarioScreenProps) {
+export function RegistroUsuario(props: RegistroUsuarioScreenProps) {
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [role, setRole] = useState('')

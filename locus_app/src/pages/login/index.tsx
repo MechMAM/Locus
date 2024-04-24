@@ -10,17 +10,17 @@ type LoginScreenProps = NativeStackScreenProps<RootStack, "Login">;
 
 export const Login = (props : LoginScreenProps) => {
 
-  const [showLoading, setShowLoading] = useState(false)
-  const [displayName, setDisplayName] = useState('')
-  const [user, setUser] = useState('')
-  const [password, setPassword] = useState<string>('')
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false)
-  const [isRegistering, setIsRegistering] = useState(false)
-  const [accessToken, setAccessToken] = useState('')
+  const [showLoading, setShowLoading] = useState(false);
+  const [displayName, setDisplayName] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [isRegistering, setIsRegistering] = useState(false);
+  const [accessToken, setAccessToken] = useState('');
 
-  const [openDialog, setOpenDialog] = useState(false)
-  const [dialogTitle, setDialogTitle] = useState('')
-  const [dialogDescription, setDialogDescription] = useState('')
+  const [openDialog, setOpenDialog] = useState(false);
+  const [dialogTitle, setDialogTitle] = useState('');
+  const [dialogDescription, setDialogDescription] = useState('');
 
   const { signIn } = useContext(AuthContext);
 
@@ -29,8 +29,8 @@ export const Login = (props : LoginScreenProps) => {
         <TextInput
           style={{ marginTop: 16 }}
           label={'Usuário'}
-          value={user}
-          onChangeText={setUser}
+          value={username}
+          onChangeText={setUsername}
           placeholder='Insira seu usuário' />
 
         <TextInput
@@ -45,7 +45,7 @@ export const Login = (props : LoginScreenProps) => {
             style={{ marginTop: 16 }}
             mode='contained'
             onPress={async () => {
-            signIn({user, password})
+            signIn({username, password})
             // await handleLogin();
           }}>Acessar</Button>
 

@@ -51,14 +51,14 @@ export function Espaco(props: RegisterScreenProps) {
     }
   }
 
-  useEffect(() => {
-    async function fetchOptions() {
-      const response = await fetch('https://sua-api.com/opcoes');
-      const data = await response.json();
-      setOptions(data);
-    }
-    fetchOptions();
-  }, []);
+  // useEffect(() => {
+  //   async function fetchOptions() {
+  //     const response = await fetch('https://sua-api.com/opcoes');
+  //     const data = await response.json();
+  //     setOptions(data);
+  //   }
+  //   fetchOptions();
+  // }, []);
 
   return (
     <View style={{ margin: 16 }}>

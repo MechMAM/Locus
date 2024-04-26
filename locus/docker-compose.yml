@@ -1,11 +1,11 @@
 version: '3.8'
 
 services:
-  locus_api:
-    container_name: locus_api
+  locus_api2:
+    container_name: locus_api2
     build:
       context: .
-      dockerfile: ./Dockerfile
+      dockerfile: ./Dockerfile2
     restart: always
     working_dir: /app
     volumes:
@@ -13,16 +13,16 @@ services:
     ports:
       - '8080:8080'
     depends_on:
-      - locus_db
+      - locus_db2
     networks:
       - backend
 
-  locus_db:
-    container_name: locus_db
+  locus_db2:
+    container_name: locus_db2
     image: postgres:latest
     restart: unless-stopped
     environment:
-      POSTGRES_DB: "locus_db"
+      POSTGRES_DB: "locus_db2"
       POSTGRES_USER: "postgres"
       POSTGRES_PASSWORD: "miguel"
     ports:

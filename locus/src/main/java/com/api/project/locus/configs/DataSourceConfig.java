@@ -10,16 +10,16 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class DataSourceConfig {
 	
-	@Value("${locus.app.datasource.url}")
+	@Value("${locus.app..datasource.url}")
 	private String databaseUrl;
 	
-	@Value("${locus.app.datasource.password}")
+	@Value("${locus.app..datasource.password}")
 	private String databasePassword;
 	
-	@Value("${locus.app.datasource.username}")
+	@Value("${locus.app..datasource.username}")
 	private String databaseUsername;
 	
-	@Value("${locus.app.datasource.driver}")
+	@Value("${locus.app..datasource.driver}")
 	private String databaseDriver;	
 	
     @Bean
